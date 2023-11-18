@@ -1,0 +1,52 @@
+name: taiwanswim_getx_app
+version: 1.0.0+1
+publish_to: none
+description: 游泳比賽記錄訂閱平台
+environment:
+  sdk: ">=3.2.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  get: 4.6.6
+  intl_phone_field: ^3.2.0
+  flutter_otp_text_field: ^1.1.1
+  shared_preferences: ^2.2.1
+  fluttertoast: ^8.2.2
+  carousel_slider: ^4.2.1
+  flutter_rating_bar: ^4.0.1
+  flick_video_player: ^0.5.0
+  expansion_tile_card: ^3.0.0
+  percent_indicator: ^4.2.3
+  expandable_text: ^2.3.0
+  flutter_screenutil: ^5.9.0
+  share_plus: ^6.3.4
+  flutter_svg: ^2.0.9
+
+dev_dependencies:
+  flutter_lints: ^3.0.1
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/svgs/
+
+  fonts:
+    - family: Gilroy
+      fonts:
+        - asset: assets/fonts/Gilroy-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Gilroy-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Gilroy-Regular.ttf
+          weight: 400
+    - family: AvenirLTPro
+      fonts:
+        - asset: assets/fonts/AvenirLTProMedium.otf
+          weight: 700
