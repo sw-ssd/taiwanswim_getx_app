@@ -8,7 +8,7 @@ import 'package:learn_manager/models/recently_added.dart';
 import 'package:learn_manager/models/slider.dart';
 import 'package:learn_manager/models/trending_cource.dart';
 
-import 'package:taiwanswim_getx_app/app/modules/onboard/onboard_model.dart';
+import 'package:taiwanswim_getx_app/app/data/models/onboard_model.dart';
 
 import '../lib/models/chate_data.dart';
 import '../lib/models/chate_messege.dart';

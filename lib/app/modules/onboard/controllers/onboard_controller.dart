@@ -4,15 +4,17 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-import 'package:taiwanswim_getx_app/app/modules/onboard/onboard_model.dart';
-import 'package:taiwanswim_getx_app/app/modules/onboard/providers/onboard_provider.dart';
+import 'package:taiwanswim_getx_app/app/data/models/onboard_model.dart';
+import 'package:taiwanswim_getx_app/app/data/providers/onboard_provider.dart';
+import 'package:taiwanswim_getx_app/app/data/services/shared_pref.dart';
 import 'package:taiwanswim_getx_app/app/routes/app_pages.dart';
-import 'package:taiwanswim_getx_app/utils/shared_pref.dart';
 
 class OnboardController extends GetxController {
   late PageController pageController;
   final pages = RxList<Onboard>().obs;
   RxInt currentpage = 0.obs;
+
+  final _pd = Get.find<PrefData>();
 
   @override
   void onInit() {
@@ -32,7 +34,7 @@ class OnboardController extends GetxController {
   }
 
   skipToggle() {
-    PrefData.setIntro(true);
+    _pd.setIntro(true);
     Get.offAllNamed(Routes.SIGNIN);
   }
 
@@ -51,7 +53,7 @@ class OnboardController extends GetxController {
 
   nextIntro() {
     if (currentpage() == pages().length - 1) {
-      PrefData.setIntro(true);
+      _pd.setIntro(true);
       Get.offAllNamed(Routes.SIGNIN);
     } else {
       nextPage();

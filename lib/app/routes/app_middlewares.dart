@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
+import 'package:taiwanswim_getx_app/app/data/services/shared_pref.dart';
 import 'package:taiwanswim_getx_app/app/routes/app_pages.dart';
-import 'package:taiwanswim_getx_app/utils/shared_pref.dart';
 
 class AuthMiddleware extends GetMiddleware {
   int? _priority;
@@ -20,7 +20,9 @@ class AuthMiddleware extends GetMiddleware {
 
   @override
   RouteSettings? redirect(String? route) {
-    PrefData.getLogin().then((value) {
+    final pd = Get.find<PrefData>();
+
+    pd.getLogin().then((value) {
       if (value == false) {
         Future.delayed(
             const Duration(seconds: 1), () => Get.snackbar("提示", "請先登入APP"));

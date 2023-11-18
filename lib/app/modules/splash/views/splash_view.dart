@@ -6,9 +6,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
+import 'package:taiwanswim_getx_app/app/data/services/shared_pref.dart';
 import 'package:taiwanswim_getx_app/app/routes/app_pages.dart';
 import 'package:taiwanswim_getx_app/utils/screen_size.dart';
-import 'package:taiwanswim_getx_app/utils/shared_pref.dart';
 
 import '../controllers/splash_controller.dart';
 
@@ -16,7 +16,8 @@ class SplashView extends GetView<SplashController> {
   const SplashView({super.key});
 
   getIntro() async {
-    bool isIntro = await PrefData.getIntro();
+    final pd = Get.find<PrefData>();
+    bool isIntro = await pd.getIntro();
 
     if (isIntro == false) {
       Timer(const Duration(seconds: 3), () => Get.toNamed(Routes.ONBOARD));

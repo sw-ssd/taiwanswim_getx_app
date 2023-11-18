@@ -1,34 +1,35 @@
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class PrefData {
-  static String prefName = "com.sowinsoft.app.learn_manager";
+class PrefData extends GetxService {
+  final String prefName = "com.sowinsoft.app.learn_manager";
 
-  static String isIntro = "${prefName}isIntro";
-  static String isLogin = "${prefName}isLigin";
-  static String isVarification = '${prefName}isVarification';
-  static String isFirstLogin = '${prefName}isFirstLogin';
+  late String isIntro = "${prefName}isIntro";
+  late String isLogin = "${prefName}isLigin";
+  late String isVarification = '${prefName}isVarification';
+  late String isFirstLogin = '${prefName}isFirstLogin';
 
-  static setIntro(bool intro) async {
+  setIntro(bool intro) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     sharedPreferences.setBool(isIntro, intro);
   }
 
-  static getIntro() async {
+  getIntro() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     bool intro = sharedPreferences.getBool(isIntro) ?? false;
     return intro;
   }
 
   ///////////////////Ligin Screen////////////////////
-  static setLogin(bool login) async {
+  setLogin(bool login) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     sharedPreferences.setBool(isLogin, login);
   }
 
-  static getLogin() async {
+  getLogin() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    bool Login = sharedPreferences.getBool(isLogin) ?? false;
-    return Login;
+    bool login = sharedPreferences.getBool(isLogin) ?? false;
+    return login;
   }
   /////////////////////varification/////////
   // static setVarification(bool varification) async {

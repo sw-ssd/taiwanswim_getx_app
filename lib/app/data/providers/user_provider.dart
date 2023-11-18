@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import '../user_model.dart';
+import '../models/user_model.dart';
 
 class UserProvider extends GetConnect {
   @override

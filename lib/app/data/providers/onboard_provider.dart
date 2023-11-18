@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 
-import '../onboard_model.dart';
+import 'package:taiwanswim_getx_app/app/data/mocks/onboard_mock.dart';
+
+import '../models/onboard_model.dart';
 
 class OnboardProvider extends GetConnect {
   @override
@@ -13,33 +15,6 @@ class OnboardProvider extends GetConnect {
     // };
     // httpClient.baseUrl = ApiPaths.BASE_URL;
     // httpClient.userAgent = ApiPaths.CUST_USER_AGENT;
-  }
-
-  List<Onboard> getOnboardsMock() {
-    return [
-      Onboard(
-        image: 'assets/images/onboarding1st.png',
-        name: 'Learn new skills every day!',
-        title: 'We provide the best learning couerses & great mentors for you.',
-      ),
-      Onboard(
-        image: 'assets/images/onboarding2nd.png',
-        name: 'Easy enroll in class !',
-        title: 'Learn anytime and anywhere easily and conveniently.',
-      ),
-      Onboard(
-        image: 'assets/images/onboarding3rd.png',
-        name: 'Get online certificate !',
-        title:
-            'Complete the full course with full dedication to get certificate.',
-      ),
-      Onboard(
-        image: 'assets/images/onboarding4th.png',
-        name: 'Explore new reasources !',
-        title:
-            'Find best course for your career that will help you to develop your skill.',
-      ),
-    ];
   }
 
   // Future<Onboard?> getOnboards(int? fetchNumber) async {
@@ -57,4 +32,8 @@ class OnboardProvider extends GetConnect {
 
   // Future<Response> deleteOnboard(int id) async =>
   //     await delete('${ApiPaths.ON_BOARD}/$id');
+
+  List<Onboard> getOnboardsMock() {
+    return onboardMockdata;
+  }
 }
