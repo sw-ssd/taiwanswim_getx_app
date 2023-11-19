@@ -25,6 +25,7 @@ dependencies:
   share_plus: ^6.3.4
   flutter_svg: ^2.0.9
   pocketbase: ^0.16.0
+  get_it: ^7.6.4
 
 dev_dependencies:
   flutter_lints: ^3.0.1

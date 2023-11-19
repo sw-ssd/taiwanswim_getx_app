@@ -1,7 +1,10 @@
 // ignore_for_file: unnecessary_overrides
 
 import 'package:flutter/foundation.dart';
+
 import 'package:get/get.dart';
+import 'package:get_it/get_it.dart';
+import 'package:pocketbase/pocketbase.dart';
 
 class SigninController extends GetxController {
   @override
@@ -20,7 +23,8 @@ class SigninController extends GetxController {
   }
 
   googleToggle() {
-    debugPrint('google click');
+    final clinet = GetIt.I.get<PocketBase>();
+    debugPrint('google click $clinet');
   }
 
   appleToggle() {

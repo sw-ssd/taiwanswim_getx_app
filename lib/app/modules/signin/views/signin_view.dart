@@ -11,25 +11,14 @@ import '../controllers/signin_controller.dart';
 class SigninView extends GetView<SigninController> {
   const SigninView({super.key});
 
-  Widget signButton() {
-    late Widget button;
-    if (GetPlatform.isIOS) {
-      button = loginApple();
-    } else if (GetPlatform.isAndroid) {
-      button = loginGoogle();
-    }
-    return button;
-  }
-
   @override
   Widget build(BuildContext context) {
     initializeScreenSize(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
-        child: PopScope(
-          //導航返回攔截
-          canPop: false,
+        child: BackButtonListener(
+          onBackButtonPressed: () => Future.value(false),
           child: Padding(
             padding: EdgeInsets.only(left: 20.w, right: 20.w),
             child: Column(
@@ -45,39 +34,13 @@ class SigninView extends GetView<SigninController> {
                         const NeverScrollableScrollPhysics(), //建立不允許使用者滾動的滾動物理效果。
                     children: [
                       SizedBox(height: .2.sh),
-                      Center(
-                        child: Text(
-                          "登入",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w700,
-                              fontSize: 24.sp,
-                              fontFamily: 'Gilroy',
-                              color: Colors.black),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
+                      title(),
                       SizedBox(height: 16.h),
-                      Center(
-                          child: Text(
-                        "很高興再次見到你！",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black,
-                            fontSize: 15.sp,
-                            fontFamily: 'Gilroy',
-                            fontStyle: FontStyle.normal),
-                        textAlign: TextAlign.center,
-                      )),
+                      subTitle(),
                       SizedBox(height: 32.h),
-                      SvgPicture.asset("assets/svgs/swim_logo.svg",
-                          width: 95.h,
-                          height: 95.h,
-                          fit: BoxFit.fitHeight,
-                          colorFilter: const ColorFilter.mode(
-                              Color.fromRGBO(35, 64, 143, 1), BlendMode.srcIn)),
+                      logo(),
                       SizedBox(height: 32.h),
                       signButton(),
-                      //SizedBox(height: 97.h),
                     ],
                   ),
                 ),
@@ -87,6 +50,16 @@ class SigninView extends GetView<SigninController> {
         ),
       ),
     );
+  }
+
+  Widget signButton() {
+    late Widget button;
+    if (GetPlatform.isIOS) {
+      button = loginApple();
+    } else if (GetPlatform.isAndroid) {
+      button = loginGoogle();
+    }
+    return button;
   }
 
   Widget loginGoogle() {
@@ -140,6 +113,43 @@ class SigninView extends GetView<SigninController> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget logo() {
+    return SvgPicture.asset("assets/svgs/swim_logo.svg",
+        width: 95.h,
+        height: 95.h,
+        fit: BoxFit.fitHeight,
+        colorFilter: const ColorFilter.mode(
+            Color.fromRGBO(35, 64, 143, 1), BlendMode.srcIn));
+  }
+
+  Widget subTitle() {
+    return Center(
+        child: Text(
+      "很高興再次見到你！",
+      style: TextStyle(
+          fontWeight: FontWeight.w500,
+          color: Colors.black,
+          fontSize: 15.sp,
+          fontFamily: 'Gilroy',
+          fontStyle: FontStyle.normal),
+      textAlign: TextAlign.center,
+    ));
+  }
+
+  Widget title() {
+    return Center(
+      child: Text(
+        "登入",
+        style: TextStyle(
+            fontWeight: FontWeight.w700,
+            fontSize: 24.sp,
+            fontFamily: 'Gilroy',
+            color: Colors.black),
+        textAlign: TextAlign.center,
       ),
     );
   }
