@@ -3,8 +3,6 @@
 import 'package:flutter/foundation.dart';
 
 import 'package:get/get.dart';
-import 'package:get_it/get_it.dart';
-import 'package:pocketbase/pocketbase.dart';
 
 class SigninController extends GetxController {
   @override

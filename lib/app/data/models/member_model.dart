@@ -1,12 +1,12 @@
-class User {
+class Member {
   String? name;
   String? image;
   String? email;
   String? phoneNo;
 
-  User({this.name, this.image, this.email, this.phoneNo});
+  Member({this.name, this.image, this.email, this.phoneNo});
 
-  User.fromJson(Map<String, dynamic> json) {
+  Member.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     image = json['image'];
     email = json['email'];

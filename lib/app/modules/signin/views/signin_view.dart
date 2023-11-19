@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 
+import 'package:taiwanswim_getx_app/app/data/services/shared_pref_service.dart';
 import 'package:taiwanswim_getx_app/utils/screen_size.dart';
 
 import '../controllers/signin_controller.dart';
@@ -17,8 +19,8 @@ class SigninView extends GetView<SigninController> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
-        child: BackButtonListener(
-          onBackButtonPressed: () => Future.value(false),
+        child: PopScope(
+          canPop: false,
           child: Padding(
             padding: EdgeInsets.only(left: 20.w, right: 20.w),
             child: Column(
@@ -154,3 +156,23 @@ class SigninView extends GetView<SigninController> {
     );
   }
 }
+
+// class TestIntroButton extends StatelessWidget {
+//   const TestIntroButton({
+//     super.key,
+//   });
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       children: [
+//         SizedBox(height: 16.h),
+//         ElevatedButton(
+//             onPressed: () {
+//               Get.find<PrefData>().setIntro(false);
+//             },
+//             child: const Text("測試 Intro")),
+//       ],
+//     );
+//   }
+// }

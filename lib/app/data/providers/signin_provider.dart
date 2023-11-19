@@ -4,10 +4,13 @@ import 'package:get_it/get_it.dart';
 import 'package:pocketbase/pocketbase.dart';
 
 import 'package:taiwanswim_getx_app/app/data/constants/api_paths.dart';
+import 'package:taiwanswim_getx_app/app/data/constants/app_constants.dart';
 
 const String googleOAuthName = "google";
 const String appleOAuthName = "apple";
 const String collectName = "members";
+const String googleRedirectUri = "members";
+const String appleRedirectUri = "members";
 
 class SigninProvider extends GetConnect {
   final clinet = GetIt.I.get<PocketBase>();
@@ -25,8 +28,8 @@ class SigninProvider extends GetConnect {
         .where((am) => am.name.toLowerCase() == googleOAuthName)
         .first;
     final responseUrl = await FlutterWebAuth2.authenticate(
-        url: "${google.authUrl}${ApiPaths.GOOGLE_REDIRECT_URI}",
-        callbackUrlScheme: ApiPaths.GOOGLE_CALLBACK_SCHEMA);
+        url: "${google.authUrl}$googleRedirectUri",
+        callbackUrlScheme: AppConstants.GOOGLE_CALLBACK_SCHEMA);
 
     final parsedUri = Uri.parse(responseUrl);
     final code = parsedUri.queryParameters['code']!;
@@ -36,10 +39,7 @@ class SigninProvider extends GetConnect {
     //}
 
     var result = await client.collection(collectName).authWithOAuth2Code(
-        googleOAuthName,
-        code,
-        google.codeVerifier,
-        ApiPaths.GOOGLE_REDIRECT_URI);
+        googleOAuthName, code, google.codeVerifier, googleRedirectUri);
 
     googleId.value = result.token;
   }

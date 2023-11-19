@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-import 'package:taiwanswim_getx_app/app/data/services/shared_pref.dart';
+import 'package:taiwanswim_getx_app/app/data/services/shared_pref_service.dart';
 import 'package:taiwanswim_getx_app/app/routes/app_pages.dart';
 import 'package:taiwanswim_getx_app/utils/screen_size.dart';
 
