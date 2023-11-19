@@ -26,7 +26,7 @@ class AppPages {
         name: _Paths.HOME,
         page: () => const HomeView(),
         binding: HomeBinding(),
-        middlewares: [AuthMiddleware(priority: 1)]),
+        middlewares: [AuthGuardMiddleware(priority: 1)]),
     GetPage(
       name: _Paths.SPLASH,
       page: () => const SplashView(),

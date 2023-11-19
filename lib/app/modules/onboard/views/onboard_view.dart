@@ -29,7 +29,7 @@ class OnboardView extends GetView<OnboardController> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        indicator(),
+                        Obx(() => indicator()),
                         button(),
                       ],
                     ),

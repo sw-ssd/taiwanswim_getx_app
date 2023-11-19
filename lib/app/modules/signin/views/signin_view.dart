@@ -10,6 +10,17 @@ import '../controllers/signin_controller.dart';
 
 class SigninView extends GetView<SigninController> {
   const SigninView({super.key});
+
+  Widget signButton() {
+    late Widget button;
+    if (GetPlatform.isIOS) {
+      button = loginApple();
+    } else if (GetPlatform.isAndroid) {
+      button = loginGoogle();
+    }
+    return button;
+  }
+
   @override
   Widget build(BuildContext context) {
     initializeScreenSize(context);
@@ -65,9 +76,7 @@ class SigninView extends GetView<SigninController> {
                           colorFilter: const ColorFilter.mode(
                               Color.fromRGBO(35, 64, 143, 1), BlendMode.srcIn)),
                       SizedBox(height: 32.h),
-                      loginGoogle(),
-                      SizedBox(height: 20.h),
-                      loginApple(),
+                      signButton(),
                       //SizedBox(height: 97.h),
                     ],
                   ),

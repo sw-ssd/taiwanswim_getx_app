@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:taiwanswim_getx_app/app/data/services/shared_pref.dart';
 import 'package:taiwanswim_getx_app/app/routes/app_pages.dart';
 
-class AuthMiddleware extends GetMiddleware {
+class AuthGuardMiddleware extends GetMiddleware {
   int? _priority;
 
   @override
@@ -16,7 +16,7 @@ class AuthMiddleware extends GetMiddleware {
     _priority = value;
   }
 
-  AuthMiddleware({int? priority}) : _priority = priority;
+  AuthGuardMiddleware({int? priority}) : _priority = priority;
 
   @override
   RouteSettings? redirect(String? route) {
