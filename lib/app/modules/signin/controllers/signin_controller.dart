@@ -23,8 +23,7 @@ class SigninController extends GetxController {
   }
 
   googleToggle() {
-    final clinet = GetIt.I.get<PocketBase>();
-    debugPrint('google click $clinet');
+    debugPrint('google click');
   }
 
   appleToggle() {
