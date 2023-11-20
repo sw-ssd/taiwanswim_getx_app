@@ -4,16 +4,14 @@ import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pocketbase/pocketbase.dart';
 
-import 'package:taiwanswim_getx_app/app/data/constants/api_paths.dart';
 import 'package:taiwanswim_getx_app/app/data/services/shared_pref_service.dart';
+import 'package:taiwanswim_getx_app/utils/tools.dart';
 
 class PbService extends GetxService {
-  PocketBase init(
-      {String url = ApiPaths.BASE_URL,
-      String port = ApiPaths.BASE_PORT,
-      required AsyncAuthStore store}) {
+  PocketBase init({String? baseUrl, required AsyncAuthStore store}) {
+    baseUrl = getEnvBaseUrl();
     final pb = PocketBase(
-      '${ApiPaths.BASE_URL}:${ApiPaths.BASE_PORT}',
+      baseUrl,
       authStore: store,
     );
     return pb;

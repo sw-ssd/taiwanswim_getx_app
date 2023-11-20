@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 
 import 'package:taiwanswim_getx_app/app/data/constants/api_paths.dart';
+import 'package:taiwanswim_getx_app/utils/tools.dart';
 
 import '../models/member_model.dart';
 
@@ -11,7 +12,7 @@ class MemeberProvider extends GetConnect {
       if (map is Map<String, dynamic>) return Member.fromJson(map);
       if (map is List) return map.map((item) => Member.fromJson(item)).toList();
     };
-    httpClient.baseUrl = ApiPaths.BASE_URL;
+    httpClient.baseUrl = getEnvBaseUrl();
   }
 
   Future<Member?> getUser(int id) async {

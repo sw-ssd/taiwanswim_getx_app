@@ -4,6 +4,8 @@ import 'package:flutter/foundation.dart';
 
 import 'package:get/get.dart';
 
+import 'package:taiwanswim_getx_app/app/data/providers/signin_provider.dart';
+
 class SigninController extends GetxController {
   @override
   void onInit() {
@@ -20,11 +22,12 @@ class SigninController extends GetxController {
     super.onClose();
   }
 
-  googleToggle() {
-    debugPrint('google click');
+  void googleToggle() async {
+    final p = Get.find<SigninProvider>();
+    await p.googleOAuth2();
   }
 
-  appleToggle() {
+  void appleToggle() {
     debugPrint('apple click');
   }
 }
