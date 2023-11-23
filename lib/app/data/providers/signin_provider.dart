@@ -28,40 +28,40 @@ class SigninProvider extends GetConnect {
     final client = GetIt.I.get<PocketBase>();
 
     try {
-      final authMethods =
-          await client.collection(collectName).listAuthMethods();
-      final google = authMethods.authProviders
-          .where((am) => am.name.toLowerCase() == googleOAuthName)
-          .first;
+      // final authMethods =
+      //     await client.collection(collectName).listAuthMethods();
+      // final google = authMethods.authProviders
+      //     .where((am) => am.name.toLowerCase() == googleOAuthName)
+      //     .first;
 
-      print(google);
+      // print(google);
 
-      final responseUrl = await FlutterWebAuth.authenticate(
-          url: "${google.authUrl}$googleRedirectUri",
-          callbackUrlScheme: "https");
+      // final responseUrl = await FlutterWebAuth.authenticate(
+      //     url: "${google.authUrl}$googleRedirectUri",
+      //     callbackUrlScheme: "https");
 
-      print(responseUrl);
+      // print(responseUrl);
 
-      final parsedUri = Uri.parse(responseUrl);
-      final code = parsedUri.queryParameters['code']!;
+      // final parsedUri = Uri.parse(responseUrl);
+      // final code = parsedUri.queryParameters['code']!;
 
-      final state = parsedUri.queryParameters['state']!;
-      if (google.state != state) {
-        throw "oops";
-      }
+      // final state = parsedUri.queryParameters['state']!;
+      // if (google.state != state) {
+      //   throw "oops";
+      // }
 
-      var result = await client.collection(collectName).authWithOAuth2Code(
-          googleOAuthName, code, google.codeVerifier, googleRedirectUri);
+      // var result = await client.collection(collectName).authWithOAuth2Code(
+      //     googleOAuthName, code, google.codeVerifier, googleRedirectUri);
 
-      googleId.value = result.token;
+      // googleId.value = result.token;
 
-      // final authData = await client
-      //     .collection(collectName)
-      //     .authWithOAuth2(googleOAuthName, (url) async {
-      //   await launchUrl(url);
-      // });
+      final authData = await client
+          .collection(collectName)
+          .authWithOAuth2(googleOAuthName, (url) async {
+        await launchUrl(url);
+      });
 
-      // print(authData);
+      print(authData);
     } catch (e) {
       debugPrint(e.toString());
       rethrow;
