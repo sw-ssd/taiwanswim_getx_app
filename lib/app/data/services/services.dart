@@ -10,5 +10,5 @@ import 'package:taiwanswim_getx_app/app/data/services/shared_pref_service.dart';
 void initServices() async {
   Get.putAsync<EnvService>(() async => EnvService());
   Get.putAsync<PrefData>(() async => PrefData());
-  Get.putAsync<PbService>(() async => PbService());
+  Get.putAsync<PbService>(() async => PbService(), tag: 'pb', permanent: true);
 }

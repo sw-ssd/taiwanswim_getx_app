@@ -69,15 +69,17 @@ class OnboardView extends GetView<OnboardController> {
   }
 
   Widget button() {
+    final br = BorderRadius.circular(22.h);
     return InkWell(
       onTap: controller.nextIntro,
+      borderRadius: br,
+      splashColor: const Color.fromRGBO(35, 64, 143, 1),
       child: Container(
         height: 56.h,
         width: 177.w,
-        //color: Color(0XFF23408F),
+        // color: const Color.fromRGBO(35, 64, 143, 1),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(22.h),
-            color: const Color.fromRGBO(35, 64, 143, 1)),
+            borderRadius: br, color: const Color.fromRGBO(35, 64, 143, 1)),
         child: (controller.currentpage() == controller.pages().length - 1)
             ? Center(
                 child: Text(

@@ -18,7 +18,7 @@ class SplashView extends GetView<SplashController> {
   getIntro() async {
     final pd = Get.find<PrefData>();
     bool isIntro = await pd.getIntro();
-
+    // Get.toNamed(Routes.ONBOARD);
     if (isIntro == false) {
       Timer(const Duration(seconds: 3), () => Get.toNamed(Routes.ONBOARD));
     } else {

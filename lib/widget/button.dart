@@ -8,8 +8,7 @@ class CustomButton extends StatelessWidget {
       this.buttonColor,
       required this.buttonText,
       this.textColor,
-      Key? key})
-      : super(key: key);
+      super.key});
   VoidCallback onTap;
   Color? buttonColor;
   double? borderRadius;
@@ -23,15 +22,15 @@ class CustomButton extends StatelessWidget {
       child: Container(
         height: 56,
         width: 374,
-        //color: Color(0XFF23408F),
+        // color: const Color.fromRGBO(35, 64, 143, 1),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(borderRadius??20),
-          color: buttonColor??const Color(0XFF23408F),
+          borderRadius: BorderRadius.circular(borderRadius ?? 20),
+          color: buttonColor ?? const Color.fromRGBO(35, 64, 143, 1),
         ),
-        child:  Center(
+        child: Center(
           child: Text(buttonText,
               style: TextStyle(
-                  color:textColor?? Color(0XFFFFFFFF),
+                  color: textColor ?? const Color.fromRGBO(255, 255, 255, 1),
                   fontSize: 18,
                   fontWeight: FontWeight.w700,
                   fontFamily: 'Gilroy')),
