@@ -5,6 +5,6 @@ version: "3"
 tasks:
   adb:reverse:
     cmds:
-      - emulator -avd $(emulator -list-avds | head -n 1)
-      - adb reverse tcp:8090 tcp:8090
+      - '~/Android/Sdk/emulator/emulator -avd ssd-avd'
+      # - adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done; adb reverse tcp:8090 tcp:8090'
     silent: true
