@@ -6,7 +6,9 @@ import 'package:taiwanswim_getx_app/app/data/services/services.dart';
 
 import 'app/routes/app_pages.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   initServices();
   runApp(
     GetMaterialApp(

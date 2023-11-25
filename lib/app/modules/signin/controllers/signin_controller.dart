@@ -25,7 +25,8 @@ class SigninController extends GetxController {
   void googleToggle() async {
     final p = Get.find<SigninProvider>();
     try {
-      await p.googleOAuth2();
+      await p.signInByGoogle();
+      Get.snackbar('成功', '登入成功');
     } catch (e) {
       Get.snackbar('錯誤', '登入失敗');
     }

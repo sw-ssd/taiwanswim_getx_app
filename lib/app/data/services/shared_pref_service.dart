@@ -1,5 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-import 'package:pocketbase/pocketbase.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:taiwanswim_getx_app/app/data/constants/app_constants.dart';
@@ -11,14 +11,6 @@ class PrefData extends GetxService {
   late String isLogin = "${AppConstants.PREFS_NAME}isLigin";
   late String isVarification = '${AppConstants.PREFS_NAME}isVarification';
   late String isFirstLogin = '${AppConstants.PREFS_NAME}isFirstLogin';
-
-  // late SharedPreferences prefs;
-
-  // @override
-  // onInit() async {
-  //   super.onInit();
-  //   prefs = await prefsInstance();
-  // }
 
   Future<SharedPreferences> prefsInstance() async {
     return await SharedPreferences.getInstance();
@@ -47,24 +39,19 @@ class PrefData extends GetxService {
     return login;
   }
 
-  Future<AsyncAuthStore> initAuthStore({String storeName = pbStoreName}) async {
+  setLoginCredential(UserCredential user) async {
     final prefs = await prefsInstance();
-    final store = AsyncAuthStore(
-      save: (String data) async => prefs.setString(storeName, data),
-      initial: prefs.getString(storeName),
-    );
-    return store;
+
+    prefs.setString('clientId', user.user!.uid);
+    prefs.setString('email', user.user!.email!);
+    prefs.setString('profile', user.user!.photoURL!);
   }
 
-  setAuthStore({String storeName = pbStoreName, String data = ''}) async {
+  getLoginCredential() async {
     final prefs = await prefsInstance();
-    return prefs.setString(storeName, data);
-  }
-
-  getAuthStore({String storeName = pbStoreName}) async {
-    final prefs = await prefsInstance();
-    final data = prefs.getString(storeName);
-    return data;
+    String email = prefs.getString('email') ?? '';
+    String password = prefs.getString('password') ?? '';
+    return [email, password];
   }
 
   /////////////////////varification/////////

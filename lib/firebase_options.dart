@@ -50,19 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBRzIfxh6H-dbKTHRbioeMjXenibHJ88x4',
-    appId: '1:576803604540:android:4bc3b18b95d9d2d9c4db39',
-    messagingSenderId: '576803604540',
-    projectId: 'taiwanswim-app',
-    storageBucket: 'taiwanswim-app.appspot.com',
+    apiKey: 'AIzaSyCeW5_XZdbLwm3CsUQ9ccAvjSUBfId8G2k',
+    appId: '1:91042964671:android:2d54e43d29cfed0d41920a',
+    messagingSenderId: '91042964671',
+    projectId: 'taiwanswim-app-50b78',
+    storageBucket: 'taiwanswim-app-50b78.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyA6HxhWqi3qvon8Y556b1zVtDQ-juk0vcI',
-    appId: '1:576803604540:ios:84fbffe00e4e0f13c4db39',
-    messagingSenderId: '576803604540',
-    projectId: 'taiwanswim-app',
-    storageBucket: 'taiwanswim-app.appspot.com',
+    apiKey: 'AIzaSyBMEc93PckfU91PORl4D2rqrRTGsJjokXA',
+    appId: '1:91042964671:ios:40ac8f0a3d56de2a41920a',
+    messagingSenderId: '91042964671',
+    projectId: 'taiwanswim-app-50b78',
+    storageBucket: 'taiwanswim-app-50b78.appspot.com',
     iosBundleId: 'com.taiwanswim.taiwanswimGetxApp',
   );
 }
