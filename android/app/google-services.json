@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "576803604540",
-    "project_id": "taiwanswim-app",
-    "storage_bucket": "taiwanswim-app.appspot.com"
+    "project_number": "91042964671",
+    "project_id": "taiwanswim-app-50b78",
+    "storage_bucket": "taiwanswim-app-50b78.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:576803604540:android:4bc3b18b95d9d2d9c4db39",
+        "mobilesdk_app_id": "1:91042964671:android:2d54e43d29cfed0d41920a",
         "android_client_info": {
           "package_name": "com.taiwanswim.taiwanswim_getx_app"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBRzIfxh6H-dbKTHRbioeMjXenibHJ88x4"
+          "current_key": "AIzaSyCeW5_XZdbLwm3CsUQ9ccAvjSUBfId8G2k"
         }
       ],
       "services": {

@@ -5,6 +5,26 @@ version: "3"
 tasks:
   adb:reverse:
     cmds:
-      - '~/Android/Sdk/emulator/emulator -avd ssd-avd'
+      - "~/Android/Sdk/emulator/emulator -avd ssd-avd"
       # - adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done; adb reverse tcp:8090 tcp:8090'
+    silent: true
+
+  build:apk:
+    cmds:
+      - flutter build apk --release
+    silent: true
+
+  keystore:uploadkey:
+    cmds:
+      - keytool -genkey -v -keystore product.jks -storetype JKS -keyalg RSA -keysize 2048 -validity 10000 -alias sowinsoft
+    silent: true
+
+  keystore:convertkey:
+    cmds:
+      - keytool -importkeystore -srckeystore product.jks -destkeystore product.jks -deststoretype pkcs12
+    silent: true
+
+  keystore:debugkey:
+    cmds:
+      - keytool -list -v -alias androiddebugkey -storepass android -keypass android -keystore ~/.android/debug.keystore
     silent: true
