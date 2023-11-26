@@ -1,6 +1,7 @@
 
 buildscript {
     ext.kotlin_version = '1.9.21'
+    ext.googlePlayServicesVersion = "4.4.0"
     
     repositories {
         google()
@@ -8,7 +9,7 @@ buildscript {
     }
 
     dependencies {
-        classpath("com.google.gms:google-services:4.4.0")
+        classpath "com.google.gms:google-services:$googlePlayServicesVersion"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }

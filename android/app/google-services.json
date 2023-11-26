@@ -12,7 +12,20 @@
           "package_name": "com.taiwanswim.taiwanswim_getx_app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "91042964671-6ghb66342aelk1tegnvnov4aoj0e5ka4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.taiwanswim.taiwanswim_getx_app",
+            "certificate_hash": "b65554cb02138c8e9174c2021bf4987ce2f0db5b"
+          }
+        },
+        {
+          "client_id": "91042964671-qff2dr4j61ji0qe7ajbnkc0aj3s5911t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCeW5_XZdbLwm3CsUQ9ccAvjSUBfId8G2k"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "91042964671-qff2dr4j61ji0qe7ajbnkc0aj3s5911t.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "91042964671-hoafo9gii0t2ocogkrr6bs1r8v93bjv9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.taiwanswim.taiwanswimGetxApp"
+              }
+            }
+          ]
         }
       }
     }

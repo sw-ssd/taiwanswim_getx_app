@@ -70,37 +70,40 @@ class OnboardView extends GetView<OnboardController> {
 
   Widget button() {
     final br = BorderRadius.circular(22.h);
-    return InkWell(
-      onTap: controller.nextIntro,
-      borderRadius: br,
-      splashColor: const Color.fromRGBO(35, 64, 143, 1),
-      child: Container(
-        height: 56.h,
-        width: 177.w,
-        // color: const Color.fromRGBO(35, 64, 143, 1),
-        decoration: BoxDecoration(
-            borderRadius: br, color: const Color.fromRGBO(35, 64, 143, 1)),
-        child: (controller.currentpage() == controller.pages().length - 1)
-            ? Center(
-                child: Text(
-                  "Get Started",
-                  style: TextStyle(
-                      color: const Color.fromRGBO(255, 255, 255, 1),
-                      fontSize: 18.sp,
-                      fontFamily: 'Gilroy',
-                      fontWeight: FontWeight.w700),
+    return Ink(
+      decoration: BoxDecoration(
+          // color: const Color.fromRGBO(35, 64, 143, 1),
+          borderRadius: br,
+          color: const Color.fromRGBO(35, 64, 143, 1)),
+      child: InkWell(
+        onTap: controller.nextIntro,
+        borderRadius: br,
+        splashColor: const Color.fromRGBO(35, 64, 143, 1),
+        child: SizedBox(
+          height: 56.h,
+          width: 177.w,
+          child: (controller.currentpage() == controller.pages().length - 1)
+              ? Center(
+                  child: Text(
+                    "Get Started",
+                    style: TextStyle(
+                        color: const Color.fromRGBO(255, 255, 255, 1),
+                        fontSize: 18.sp,
+                        fontFamily: 'Gilroy',
+                        fontWeight: FontWeight.w700),
+                  ),
+                )
+              : Center(
+                  child: Text(
+                    "Next",
+                    style: TextStyle(
+                        color: const Color.fromRGBO(255, 255, 255, 1),
+                        fontSize: 18.sp,
+                        fontFamily: 'Gilroy',
+                        fontWeight: FontWeight.w700),
+                  ),
                 ),
-              )
-            : Center(
-                child: Text(
-                  "Next",
-                  style: TextStyle(
-                      color: const Color.fromRGBO(255, 255, 255, 1),
-                      fontSize: 18.sp,
-                      fontFamily: 'Gilroy',
-                      fontWeight: FontWeight.w700),
-                ),
-              ),
+        ),
       ),
     );
   }

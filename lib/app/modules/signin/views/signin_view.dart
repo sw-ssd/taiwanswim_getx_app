@@ -1,8 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+
 import 'package:taiwanswim_getx_app/utils/screen_size.dart';
 
 import '../controllers/signin_controller.dart';
@@ -40,6 +43,14 @@ class SigninView extends GetView<SigninController> {
                       logo(),
                       SizedBox(height: 32.h),
                       signButton(),
+                      SizedBox(height: 32.h),
+                      loginButton(
+                        tap: controller.googleLogout,
+                        title: "Logout with Google",
+                        svgpath: "google_logo.svg",
+                        backgroundColor: Colors.grey.withOpacity(0.3),
+                        textColor: const Color.fromRGBO(35, 64, 143, 1),
+                      ),
                     ],
                   ),
                 ),
@@ -54,63 +65,55 @@ class SigninView extends GetView<SigninController> {
   Widget signButton() {
     late Widget button;
     if (GetPlatform.isIOS) {
-      button = loginApple();
+      button = loginButton(
+        tap: controller.googleLogin,
+        title: "Login with Apple",
+        svgpath: "apple_logo.svg",
+        backgroundColor: Colors.grey.withOpacity(0.3),
+        textColor: const Color.fromRGBO(35, 64, 143, 1),
+      );
     } else if (GetPlatform.isAndroid) {
-      button = loginGoogle();
+      button = loginButton(
+        tap: controller.googleLogin,
+        title: "Login with Google",
+        svgpath: "google_logo.svg",
+        backgroundColor: Colors.grey.withOpacity(0.3),
+        textColor: const Color.fromRGBO(35, 64, 143, 1),
+      );
     }
     return button;
   }
 
-  Widget loginGoogle() {
-    return GestureDetector(
-      onTap: controller.googleToggle,
-      child: Container(
-        height: 56.h,
-        width: 374.w,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            color: Colors.grey.withOpacity(0.1)),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SvgPicture.asset("assets/svgs/google_logo.svg",
-                width: 32.w, height: 32.h),
-            SizedBox(width: 10.w),
-            Text(
-              "Login with Google",
-              style: TextStyle(
-                  color: const Color.fromRGBO(35, 64, 143, 1),
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.w500),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget loginApple() {
-    return GestureDetector(
-      onTap: controller.appleToggle,
-      child: Container(
-        height: 56.h,
-        width: 374.w,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            color: Colors.grey.withOpacity(0.1)),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SvgPicture.asset("assets/svgs/apple_logo.svg"),
-            SizedBox(width: 10.w),
-            Text(
-              "Login with Apple",
-              style: TextStyle(
-                  color: const Color.fromRGBO(35, 64, 143, 1),
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.w500),
-            ),
-          ],
+  Widget loginButton({
+    required void Function() tap,
+    required String title,
+    required String svgpath,
+    required Color backgroundColor,
+    required Color textColor,
+  }) {
+    return Ink(
+      child: InkWell(
+        onTap: tap,
+        child: Container(
+          height: 56.h,
+          width: 374.w,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12), color: backgroundColor),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SvgPicture.asset("assets/svgs/$svgpath",
+                  width: 32.w, height: 32.h),
+              SizedBox(width: 10.w),
+              Text(
+                title,
+                style: TextStyle(
+                    color: textColor,
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.w500),
+              ),
+            ],
+          ),
         ),
       ),
     );

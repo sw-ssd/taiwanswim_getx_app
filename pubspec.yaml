@@ -24,12 +24,11 @@ dependencies:
   flutter_screenutil: ^5.9.0
   share_plus: ^6.3.4
   flutter_svg: ^2.0.9
-  pocketbase: ^0.16.0
   flutter_dotenv: ^5.1.0
-  url_launcher: ^6.2.1
   firebase_core: ^2.23.0
   firebase_auth: ^4.14.1
   google_sign_in: ^6.1.6
+  google_sign_in_dartio: ^0.2.2+1
 
 dev_dependencies:
   flutter_lints: ^3.0.1

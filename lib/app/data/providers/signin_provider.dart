@@ -1,26 +1,21 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-import 'package:taiwanswim_getx_app/app/data/services/shared_pref_service.dart';
 import 'package:taiwanswim_getx_app/utils/tools.dart';
 
 /// The scopes required by this application.
 const List<String> scopes = <String>[
-  'clientId',
-  'profile',
   'email',
   'https://www.googleapis.com/auth/contacts.readonly',
 ];
 
-GoogleSignIn _googleSignIn = GoogleSignIn(
-  // Optional clientId
-  // clientId: 'your-client_id.apps.googleusercontent.com',
-  scopes: scopes,
-);
+const withSilentVerificationSMSMFA = true;
 
 class SigninProvider extends GetConnect {
   final Rx<GoogleSignInAccount?> _currentUser = Rx<GoogleSignInAccount?>(null);
@@ -30,24 +25,35 @@ class SigninProvider extends GetConnect {
   get currentUser => _currentUser.value;
   get isAuthorized => _isAuthorized.value;
   get contactText => _contactText.value;
+  final GoogleSignIn _googleSignIn = GoogleSignIn(
+    // Optional clientId
+    // clientId: 'your-client_id.apps.googleusercontent.com',
+    scopes: scopes,
+  );
 
   @override
   void onInit() {
     super.onInit();
     httpClient.baseUrl = getEnvBaseUrl();
+  }
 
+  void listenGoogle() {
+    debugPrint('start listenGoogle');
     _googleSignIn.onCurrentUserChanged
         .listen((GoogleSignInAccount? account) async {
       // In mobile, being authenticated means being authorized...
       bool isAuthorized = account != null;
+
       // However, in the web...
-      if (GetPlatform.isWeb && account != null) {
+      if (kIsWeb && account != null) {
         isAuthorized = await _googleSignIn.canAccessScopes(scopes);
       }
 
       _currentUser.value = account;
       _isAuthorized.value = isAuthorized;
 
+      // debugPrint('account: $account');
+      // debugPrint('isAuth: $isAuthorized');
       // Now that we know that the user can access the required scopes, the app
       // can call the REST API.
       if (isAuthorized) {
@@ -74,7 +80,9 @@ class SigninProvider extends GetConnect {
     if (response.statusCode != 200) {
       _contactText.value = 'People API gave a ${response.statusCode} '
           'response. Check logs for details.';
-      print('People API ${response.statusCode} response: ${response.body}');
+      if (kDebugMode) {
+        print('People API ${response.statusCode} response: ${response.body}');
+      }
       return;
     }
     final Map<String, dynamic> data =
@@ -124,25 +132,42 @@ class SigninProvider extends GetConnect {
     }
   }
 
-  Future<void> signOutByGoogle() => _googleSignIn.disconnect();
+  Future<void> signOutByGoogle() => FirebaseAuth.instance.signOut();
 
-  Future<void> signInByGoogle() async {
-    // Trigger the authentication flow
-    final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+  Future<UserCredential> signInByGoogle() async {
+    try {
+      // Trigger the authentication flow
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      _currentUser.value = googleUser;
+      // Obtain the auth details from the request
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser?.authentication;
 
-    // Obtain the auth details from the request
-    final GoogleSignInAuthentication? googleAuth =
-        await googleUser?.authentication;
+      // Create a new credential
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
 
-    // Create a new credential
-    final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth?.accessToken,
-      idToken: googleAuth?.idToken,
-    );
+      final UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithCredential(credential);
 
-    final UserCredential userCredential =
-        await FirebaseAuth.instance.signInWithCredential(credential);
+      return userCredential;
+    } on FirebaseAuthMultiFactorException catch (e) {
+      debugPrint('e: $e');
+      rethrow;
+    }
+  }
 
-    Get.find<PrefData>().setLoginCredential(userCredential);
+  Future<void> signInByGoogleTest() async {
+    try {
+      // Trigger the authentication flow
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      _currentUser.value = googleUser;
+      debugPrint('googleUser: $googleUser');
+    } on FirebaseAuthMultiFactorException catch (e) {
+      debugPrint('e: $e');
+      rethrow;
+    }
   }
 }
