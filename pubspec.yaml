@@ -29,6 +29,7 @@ dependencies:
   firebase_auth: ^4.14.1
   google_sign_in: ^6.1.6
   google_sign_in_dartio: ^0.2.2+1
+  cloud_firestore: ^4.13.2
 
 dev_dependencies:
   flutter_lints: ^3.0.1

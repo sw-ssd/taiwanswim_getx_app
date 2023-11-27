@@ -63,6 +63,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '91042964671',
     projectId: 'taiwanswim-app-50b78',
     storageBucket: 'taiwanswim-app-50b78.appspot.com',
+    androidClientId: '91042964671-6ghb66342aelk1tegnvnov4aoj0e5ka4.apps.googleusercontent.com',
+    iosClientId: '91042964671-hoafo9gii0t2ocogkrr6bs1r8v93bjv9.apps.googleusercontent.com',
     iosBundleId: 'com.taiwanswim.taiwanswimGetxApp',
   );
 }

@@ -52,8 +52,8 @@ class SigninProvider extends GetConnect {
       _currentUser.value = account;
       _isAuthorized.value = isAuthorized;
 
-      // debugPrint('account: $account');
-      // debugPrint('isAuth: $isAuthorized');
+      debugPrint('account: $account');
+      debugPrint('isAuth: $isAuthorized');
       // Now that we know that the user can access the required scopes, the app
       // can call the REST API.
       if (isAuthorized) {
@@ -132,17 +132,15 @@ class SigninProvider extends GetConnect {
     }
   }
 
-  Future<void> signOutByGoogle() => FirebaseAuth.instance.signOut();
+  Future<void> signoutWithGoogle() => FirebaseAuth.instance.signOut();
 
-  Future<UserCredential> signInByGoogle() async {
+  Future<UserCredential> signinWithGoogle() async {
     try {
       // Trigger the authentication flow
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-      _currentUser.value = googleUser;
       // Obtain the auth details from the request
       final GoogleSignInAuthentication? googleAuth =
           await googleUser?.authentication;
-
       // Create a new credential
       final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth?.accessToken,

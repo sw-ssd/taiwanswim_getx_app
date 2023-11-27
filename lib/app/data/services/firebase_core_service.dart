@@ -34,7 +34,6 @@ class FirebaseService extends GetxService {
     }
   }
 
-  authStateChange() {
-    return _auth.authStateChanges();
-  }
+  FirebaseApp get app => _app;
+  FirebaseAuth get auth => _auth;
 }
