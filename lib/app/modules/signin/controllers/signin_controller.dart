@@ -47,7 +47,9 @@ class SigninController extends GetxController {
       }
 
       Get.snackbar('成功', '登入成功');
-      Get.offAllNamed(Routes.HOME);
+      //NOTE use Navigator 2 的 API，即 rootDelegate。
+      // https://github.com/jonataslaw/getx/discussions/1566
+      Get.rootDelegate.offAndToNamed(Routes.HOME);
     } catch (e) {
       Get.snackbar('錯誤', '登入失敗');
     }

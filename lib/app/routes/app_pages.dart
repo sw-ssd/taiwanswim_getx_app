@@ -23,10 +23,10 @@ class AppPages {
 
   static final routes = [
     GetPage(
-        name: _Paths.HOME,
-        page: () => const HomeView(),
-        binding: HomeBinding(),
-        middlewares: [AuthGuardMiddleware(priority: 1)]),
+      name: _Paths.HOME,
+      page: () => const HomeView(),
+      binding: HomeBinding(),
+    ),
     GetPage(
       name: _Paths.SPLASH,
       page: () => const SplashView(),
@@ -37,10 +37,10 @@ class AppPages {
         page: () => const OnboardView(),
         binding: OnboardBinding()),
     GetPage(
-      name: _Paths.SIGNIN,
-      page: () => const SigninView(),
-      binding: SigninBinding(),
-    ),
+        name: _Paths.SIGNIN,
+        page: () => const SigninView(),
+        binding: SigninBinding(),
+        middlewares: [AuthGuardMiddleware()]),
     GetPage(
       name: _Paths.SIGNUP,
       page: () => const SignupView(),
