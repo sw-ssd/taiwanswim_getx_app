@@ -1,26 +1,27 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-
-import 'package:taiwanswim_getx_app/app/data/constants/api_paths.dart';
-import 'package:taiwanswim_getx_app/utils/tools.dart';
 
 import '../models/member_model.dart';
 
+const String _collection = 'members';
+
 class MemeberProvider extends GetConnect {
-  @override
-  void onInit() {
-    httpClient.defaultDecoder = (map) {
-      if (map is Map<String, dynamic>) return Member.fromJson(map);
-      if (map is List) return map.map((item) => Member.fromJson(item)).toList();
-    };
-    httpClient.baseUrl = getEnvBaseUrl();
+  final docRef =
+      FirebaseFirestore.instance.collection(_collection).withConverter(
+            fromFirestore: MemberModel.fromFirestore,
+            toFirestore: (MemberModel mem, options) => mem.toFirestore(),
+          );
+
+  setMember(MemberModel mem, String uid) {
+    docRef
+        .doc(uid)
+        .set(mem)
+        .catchError((error) => throw Exception('Failed to add member: $error'));
   }
 
-  Future<Member?> getUser(int id) async {
-    final response = await get('member/$id');
-    return response.body;
+  Future<MemberModel> getMember(String uid) async {
+    final doc = await docRef.doc(uid).get();
+    return doc.data()!;
   }
-
-  Future<Response<Member>> postUser(Member member) async =>
-      await post('member', member);
-  Future<Response> deleteUser(int id) async => await delete('member/$id');
 }
+// 

@@ -1,24 +1,39 @@
-class Member {
-  String? name;
-  String? image;
-  String? email;
-  String? phoneNo;
+//  'email': user.email,
+//           'displayName': user.displayName,
+//           'photoURL': user.photoURL,
+//           'lastSignInTime': user.metadata.lastSignInTime,
+//           'creationTime': user.metadata.creationTime,
 
-  Member({this.name, this.image, this.email, this.phoneNo});
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-  Member.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    image = json['image'];
-    email = json['email'];
-    phoneNo = json['phoneNo'];
+class MemberModel {
+  final String? displayName;
+  final String? email;
+  final String? photoURL;
+
+  MemberModel({
+    this.displayName,
+    this.email,
+    this.photoURL,
+  });
+
+  factory MemberModel.fromFirestore(
+    DocumentSnapshot<Map<String, dynamic>> snapshot,
+    SnapshotOptions? options,
+  ) {
+    final data = snapshot.data();
+    return MemberModel(
+      displayName: data?['displayName'],
+      email: data?['email'],
+      photoURL: data?['photoURL'],
+    );
   }
 
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['name'] = name;
-    data['image'] = image;
-    data['email'] = email;
-    data['phoneNo'] = phoneNo;
-    return data;
+  Map<String, dynamic> toFirestore() {
+    return {
+      if (displayName != null) "displayName": displayName,
+      if (email != null) "email": email,
+      if (photoURL != null) "photoURL": photoURL,
+    };
   }
 }

@@ -1,16 +1,18 @@
 // ignore_for_file: unnecessary_overrides
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:get/get.dart';
 
-import 'package:taiwanswim_getx_app/app/data/providers/firebase_store_provider.dart';
+import 'package:taiwanswim_getx_app/app/data/models/member_model.dart';
+import 'package:taiwanswim_getx_app/app/data/providers/member_provider.dart';
 import 'package:taiwanswim_getx_app/app/data/providers/signin_provider.dart';
 import 'package:taiwanswim_getx_app/app/routes/app_pages.dart';
 
 class SigninController extends GetxController {
   final provider = Get.find<SigninProvider>();
-  final store = Get.find<FirebaseStoreProvider>();
+  final mbrStore = Get.find<MemeberProvider>();
 
   @override
   void onInit() {
@@ -31,20 +33,17 @@ class SigninController extends GetxController {
     try {
       final uc = await provider.signinWithGoogle();
       final user = uc.user;
+      debugPrint('user: $user');
 
-      final doc = await store.members.doc(user!.uid).get();
-      if (doc.exists) {
-        debugPrint('user: ${doc.data()}');
-        return;
-      } else {
-        store.members.doc(user!.uid).set({
-          'uid': user.uid,
-          'email': user.email,
-          'displayName': user.displayName,
-          'photoURL': user.photoURL,
-          'lastSignInTime': user.metadata.lastSignInTime,
-          'creationTime': user.metadata.creationTime,
-        });
+      if (user != null) {
+        await mbrStore.setMember(
+          MemberModel(
+            email: user.email,
+            displayName: user.displayName,
+            photoURL: user.photoURL,
+          ),
+          user.uid,
+        );
       }
 
       Get.snackbar('成功', '登入成功');
