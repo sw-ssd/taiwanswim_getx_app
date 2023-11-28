@@ -1,8 +1,12 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:get/get.dart';
+
+import 'package:taiwanswim_getx_app/app/data/services/env_service.dart';
 
 String getEnvBaseUrl() {
-  final String host = dotenv.env['HOST'] ?? 'localhost';
-  final String port = dotenv.env['PORT'] ?? '8090';
-  final String schema = dotenv.env['SCHEMA'] ?? 'http';
+  final dot = Get.find<EnvService>();
+
+  final String host = dot.getEnvWithDefault("HOST", "localhost");
+  final String port = dot.getEnvWithDefault("PORT", "8080");
+  final String schema = dot.getEnvWithDefault("SCHEMA", "http");
   return '$schema://$host:$port';
 }

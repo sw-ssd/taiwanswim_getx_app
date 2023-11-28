@@ -18,12 +18,15 @@ class SplashView extends GetView<SplashController> {
   getIntro() async {
     final pd = Get.find<PrefData>();
     bool isIntro = await pd.getIntro();
-    Get.toNamed(Routes.ONBOARD);
+    // Get.rootDelegate.toNamed(Routes.ONBOARD);
     if (isIntro == false) {
-      Timer(const Duration(seconds: 3), () => Get.toNamed(Routes.ONBOARD));
+      Timer(const Duration(seconds: 3),
+          () => Get.rootDelegate.toNamed(Routes.ONBOARD));
     } else {
-      Get.offAllNamed(Routes.SIGNIN);
+      Get.rootDelegate.toNamed(Routes.SIGNIN);
     }
+
+    debugPrint("isIntro: $isIntro");
   }
 
   @override

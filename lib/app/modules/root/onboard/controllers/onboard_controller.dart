@@ -35,7 +35,7 @@ class OnboardController extends GetxController {
 
   skipToggle() {
     _pd.setIntro(true);
-    Get.offAllNamed(Routes.SIGNIN);
+    Get.rootDelegate.offAndToNamed(Routes.SIGNIN);
   }
 
   initPageMock() {
@@ -54,7 +54,7 @@ class OnboardController extends GetxController {
   nextIntro() {
     if (currentpage() == pages().length - 1) {
       _pd.setIntro(true);
-      Get.offAllNamed(Routes.SIGNIN);
+      Get.rootDelegate.offAndToNamed(Routes.SIGNIN);
     } else {
       nextPage();
     }

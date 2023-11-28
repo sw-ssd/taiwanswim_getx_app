@@ -156,16 +156,4 @@ class SigninProvider extends GetConnect {
       rethrow;
     }
   }
-
-  Future<void> signInByGoogleTest() async {
-    try {
-      // Trigger the authentication flow
-      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-      _currentUser.value = googleUser;
-      debugPrint('googleUser: $googleUser');
-    } on FirebaseAuthMultiFactorException catch (e) {
-      debugPrint('e: $e');
-      rethrow;
-    }
-  }
 }

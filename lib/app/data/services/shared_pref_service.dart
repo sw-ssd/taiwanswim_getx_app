@@ -7,10 +7,15 @@ import 'package:taiwanswim_getx_app/app/data/constants/app_constants.dart';
 const String pbStoreName = 'pb_auth';
 
 class PrefData extends GetxService {
-  late String isIntro = "${AppConstants.PREFS_NAME}isIntro";
-  late String isLogin = "${AppConstants.PREFS_NAME}isLigin";
-  late String isVarification = '${AppConstants.PREFS_NAME}isVarification';
-  late String isFirstLogin = '${AppConstants.PREFS_NAME}isFirstLogin';
+  late String isIntroName = "${AppConstants.PREFS_NAME}isIntro";
+  late String isLoginName = "${AppConstants.PREFS_NAME}isLigin";
+  late String isVarificationName = '${AppConstants.PREFS_NAME}isVarification';
+  late String isFirstLoginName = '${AppConstants.PREFS_NAME}isFirstLogin';
+
+  // final isLogin = false.obs;
+  // final isIntro = false.obs;
+  // final isVarification = false.obs;
+  // final isFirstLogin = false.obs;
 
   Future<SharedPreferences> prefsInstance() async {
     return await SharedPreferences.getInstance();
@@ -18,40 +23,25 @@ class PrefData extends GetxService {
 
   setIntro(bool intro) async {
     final prefs = await prefsInstance();
-    prefs.setBool(isIntro, intro);
+    prefs.setBool(isIntroName, intro);
   }
 
   getIntro() async {
     final prefs = await prefsInstance();
-    bool intro = prefs.getBool(isIntro) ?? false;
+    bool intro = prefs.getBool(isIntroName) ?? false;
     return intro;
   }
 
   ///////////////////Ligin Screen////////////////////
   setLogin(bool login) async {
     final prefs = await prefsInstance();
-    prefs.setBool(isLogin, login);
+    prefs.setBool(isLoginName, login);
   }
 
   getLogin() async {
     final prefs = await prefsInstance();
-    bool login = prefs.getBool(isLogin) ?? false;
+    bool login = prefs.getBool(isLoginName) ?? false;
     return login;
-  }
-
-  setLoginCredential(UserCredential user) async {
-    final prefs = await prefsInstance();
-
-    prefs.setString('clientId', user.user!.uid);
-    prefs.setString('email', user.user!.email!);
-    prefs.setString('profile', user.user!.photoURL!);
-  }
-
-  getLoginCredential() async {
-    final prefs = await prefsInstance();
-    String email = prefs.getString('email') ?? '';
-    String password = prefs.getString('password') ?? '';
-    return [email, password];
   }
 
   /////////////////////varification/////////
