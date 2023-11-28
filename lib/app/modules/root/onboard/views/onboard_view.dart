@@ -14,11 +14,12 @@ class OnboardView extends GetView<OnboardController> {
   Widget build(BuildContext context) {
     initializeScreenSize(context);
     // controller.initPageMock();
+    final PageController pageController = PageController();
     return Scaffold(
       body: SafeArea(
         child: Stack(
           children: [
-            generatepage(),
+            generatepage(pageController),
             Padding(
               padding: EdgeInsets.only(left: 20.w, right: 20.w),
               child: Column(
@@ -30,7 +31,7 @@ class OnboardView extends GetView<OnboardController> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Obx(() => indicator()),
-                        button(),
+                        button(pageController),
                       ],
                     ),
                   ),
@@ -68,7 +69,7 @@ class OnboardView extends GetView<OnboardController> {
         }));
   }
 
-  Widget button() {
+  Widget button(PageController pageController) {
     final br = BorderRadius.circular(22.h);
     return Ink(
       decoration: BoxDecoration(
@@ -76,7 +77,7 @@ class OnboardView extends GetView<OnboardController> {
           borderRadius: br,
           color: const Color.fromRGBO(35, 64, 143, 1)),
       child: InkWell(
-        onTap: controller.nextIntro,
+        onTap: () => controller.nextIntro(pageController),
         borderRadius: br,
         splashColor: const Color.fromRGBO(35, 64, 143, 1),
         child: SizedBox(
@@ -135,11 +136,11 @@ class OnboardView extends GetView<OnboardController> {
           );
   }
 
-  Widget generatepage() {
+  Widget generatepage(PageController pageController) {
     return PageView.builder(
         itemCount: controller.pages().length,
         scrollDirection: Axis.horizontal,
-        controller: controller.pageController,
+        controller: pageController,
         onPageChanged: controller.onChangePage,
         itemBuilder: (context, index) {
           return Column(

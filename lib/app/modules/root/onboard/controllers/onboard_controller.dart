@@ -10,7 +10,6 @@ import 'package:taiwanswim_getx_app/app/data/services/shared_pref_service.dart';
 import 'package:taiwanswim_getx_app/app/routes/app_pages.dart';
 
 class OnboardController extends GetxController {
-  late PageController pageController;
   final pages = RxList<Onboard>().obs;
   RxInt currentpage = 0.obs;
 
@@ -18,7 +17,6 @@ class OnboardController extends GetxController {
 
   @override
   void onInit() {
-    pageController = PageController();
     super.onInit();
     initPageMock();
   }
@@ -46,17 +44,17 @@ class OnboardController extends GetxController {
     currentpage.value = index;
   }
 
-  nextPage() {
+  nextPage(PageController pageController) {
     pageController.nextPage(
         duration: const Duration(milliseconds: 100), curve: Curves.bounceIn);
   }
 
-  nextIntro() {
+  nextIntro(PageController pageController) {
     if (currentpage() == pages().length - 1) {
       _pd.setIntro(true);
       Get.rootDelegate.offAndToNamed(Routes.SIGNIN);
     } else {
-      nextPage();
+      nextPage(pageController);
     }
   }
 }
