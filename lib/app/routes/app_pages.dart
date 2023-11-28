@@ -1,19 +1,21 @@
 import 'package:get/get.dart';
 
-import 'package:taiwanswim_getx_app/app/modules/root/onboard/bindings/onboard_binding.dart';
-import 'package:taiwanswim_getx_app/app/modules/root/onboard/views/onboard_view.dart';
-
 import '../modules/root/bindings/root_binding.dart';
 import '../modules/root/home/bindings/home_binding.dart';
 import '../modules/root/home/dashboard/bindings/dashboard_binding.dart';
 import '../modules/root/home/dashboard/views/dashboard_view.dart';
+import '../modules/root/home/profile/bindings/profile_binding.dart';
+import '../modules/root/home/profile/views/profile_view.dart';
+import '../modules/root/home/records/bindings/records_binding.dart';
+import '../modules/root/home/records/views/records_view.dart';
 import '../modules/root/home/views/home_view.dart';
+import '../modules/root/onboard/bindings/onboard_binding.dart';
+import '../modules/root/onboard/views/onboard_view.dart';
 import '../modules/root/signin/bindings/signin_binding.dart';
 import '../modules/root/signin/views/signin_view.dart';
 import '../modules/root/splash/bindings/splash_binding.dart';
 import '../modules/root/splash/views/splash_view.dart';
 import '../modules/root/views/root_view.dart';
-
 import 'app_middlewares.dart';
 
 // ignore_for_file: prefer_const_literals_to_create_immutables
@@ -51,6 +53,16 @@ class AppPages {
               name: _Paths.DASHBOARD,
               page: () => const DashboardView(),
               binding: DashboardBinding(),
+            ),
+            GetPage(
+              name: _Paths.PROFILE,
+              page: () => const ProfileView(),
+              binding: ProfileBinding(),
+            ),
+            GetPage(
+              name: _Paths.RECORDS,
+              page: () => const RecordsView(),
+              binding: RecordsBinding(),
             ),
           ],
         ),

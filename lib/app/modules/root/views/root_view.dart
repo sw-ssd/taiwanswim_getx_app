@@ -12,21 +12,21 @@ class RootView extends GetView<RootController> {
   Widget build(BuildContext context) {
     return GetRouterOutlet.builder(
       builder: (context, delegate, current) {
-        final title = current?.uri;
-        var effectiveTitle = current?.currentPage?.title;
-        if (effectiveTitle != null) {
-          effectiveTitle = '(GetPage.effectiveTitle: $effectiveTitle)';
-        } else {
-          effectiveTitle = '';
-        }
+        // final title = current?.uri;
+        // var effectiveTitle = current?.currentPage?.title;
+        // if (effectiveTitle != null) {
+        //   effectiveTitle = '(GetPage.effectiveTitle: $effectiveTitle)';
+        // } else {
+        //   effectiveTitle = '';
+        // }
 
         return Scaffold(
-          appBar: AppBar(
-            title: Text(
-              '$title $effectiveTitle',
-            ),
-            centerTitle: true,
-          ),
+          // appBar: AppBar(
+          //   title: Text(
+          //     '$title $effectiveTitle',
+          //   ),
+          //   centerTitle: true,
+          // ),
           body: GetRouterOutlet(
             initialRoute: Routes.SPLASH,
             // anchorRoute: '/',

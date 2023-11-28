@@ -2,12 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-import 'package:taiwanswim_getx_app/app/data/services/env_service.dart';
-import 'package:taiwanswim_getx_app/app/data/services/firebase_core_service.dart';
 import 'package:taiwanswim_getx_app/app/data/services/services.dart';
-import 'package:taiwanswim_getx_app/app/data/services/shared_pref_service.dart';
-import 'package:taiwanswim_getx_app/app/modules/root/splash/views/splash_view.dart';
-import 'package:taiwanswim_getx_app/app/modules/root/views/root_view.dart';
 
 import 'app/routes/app_pages.dart';
 
