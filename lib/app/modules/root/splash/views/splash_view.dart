@@ -1,13 +1,9 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-import 'package:taiwanswim_getx_app/app/data/services/shared_pref_service.dart';
-import 'package:taiwanswim_getx_app/app/routes/app_pages.dart';
 import 'package:taiwanswim_getx_app/utils/screen_size.dart';
 
 import '../controllers/splash_controller.dart';
@@ -15,24 +11,10 @@ import '../controllers/splash_controller.dart';
 class SplashView extends GetView<SplashController> {
   const SplashView({super.key});
 
-  getIntro() async {
-    final pd = Get.find<PrefData>();
-    bool isIntro = await pd.getIntro();
-    // Get.rootDelegate.toNamed(Routes.ONBOARD);
-    if (isIntro == false) {
-      Timer(const Duration(seconds: 3),
-          () => Get.rootDelegate.toNamed(Routes.ONBOARD));
-    } else {
-      Get.rootDelegate.toNamed(Routes.SIGNIN);
-    }
-
-    debugPrint("isIntro: $isIntro");
-  }
-
   @override
   Widget build(BuildContext context) {
     initializeScreenSize(context);
-    getIntro();
+    controller.getIntro();
 
     return Scaffold(
       body: Column(

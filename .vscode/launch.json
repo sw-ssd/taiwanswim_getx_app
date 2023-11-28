@@ -5,22 +5,23 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "taiwanswim_getx_app",
+            "name": "taiwanswim_getx_app (debug mode)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "debug"
+            "flutterMode": "debug",
+            "cwd": "taiwanswim_getx_app"
         },
-        {
-            "name": "taiwanswim_getx_app (profile mode)",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "profile"
-        },
-        {
-            "name": "taiwanswim_getx_app (release mode)",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "release"
-        }
+        // {
+        //     "name": "taiwanswim_getx_app (profile mode)",
+        //     "request": "launch",
+        //     "type": "dart",
+        //     "flutterMode": "profile"
+        // },
+        // {
+        //     "name": "taiwanswim_getx_app (release mode)",
+        //     "request": "launch",
+        //     "type": "dart",
+        //     "flutterMode": "release"
+        // }
     ]
 }

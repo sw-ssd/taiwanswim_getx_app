@@ -1,20 +1,20 @@
-// ignore_for_file: unnecessary_overrides
+import 'dart:async';
 
 import 'package:get/get.dart';
 
+import 'package:taiwanswim_getx_app/app/data/services/shared_pref_service.dart';
+import 'package:taiwanswim_getx_app/app/routes/app_pages.dart';
+
 class SplashController extends GetxController {
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
+  getIntro() async {
+    final pd = Get.find<PrefData>();
+    bool isIntro = await pd.getIntro();
+    // Get.rootDelegate.toNamed(Routes.ONBOARD);
+    if (isIntro == false) {
+      Timer(const Duration(seconds: 3),
+          () => Get.rootDelegate.toNamed(Routes.ONBOARD));
+    } else {
+      Get.rootDelegate.toNamed(Routes.SIGNIN);
+    }
   }
 }
