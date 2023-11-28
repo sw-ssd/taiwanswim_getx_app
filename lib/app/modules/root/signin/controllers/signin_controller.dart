@@ -8,11 +8,13 @@ import 'package:get/get.dart';
 import 'package:taiwanswim_getx_app/app/data/models/member_model.dart';
 import 'package:taiwanswim_getx_app/app/data/providers/member_provider.dart';
 import 'package:taiwanswim_getx_app/app/data/providers/signin_provider.dart';
+import 'package:taiwanswim_getx_app/app/data/services/shared_pref_service.dart';
 import 'package:taiwanswim_getx_app/app/routes/app_pages.dart';
 
 class SigninController extends GetxController {
   final provider = Get.find<SigninProvider>();
   final mbrStore = Get.find<MemeberProvider>();
+  final pd = Get.find<PrefData>();
 
   @override
   void onInit() {
@@ -44,11 +46,10 @@ class SigninController extends GetxController {
           ),
           user.uid,
         );
+        await pd.setLogin(true);
       }
 
       Get.snackbar('成功', '登入成功');
-      //NOTE use Navigator 2 的 API，即 rootDelegate。
-      // https://github.com/jonataslaw/getx/discussions/1566
       Get.rootDelegate.offAndToNamed(Routes.HOME);
     } catch (e) {
       Get.snackbar('錯誤', '登入失敗');

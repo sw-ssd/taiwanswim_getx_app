@@ -28,8 +28,8 @@ class AppPages {
       name: '/',
       page: () => const RootView(),
       binding: RootBinding(),
-      // participatesInRootNavigator: true,
-      // preventDuplicates: true,
+      participatesInRootNavigator: true,
+      preventDuplicates: true,
       children: [
         GetPage(
           middlewares: [
@@ -41,7 +41,7 @@ class AppPages {
           binding: SigninBinding(),
         ),
         GetPage(
-          // preventDuplicates: true,
+          preventDuplicates: true,
           name: _Paths.HOME,
           page: () => const HomeView(),
           binding: HomeBinding(),
