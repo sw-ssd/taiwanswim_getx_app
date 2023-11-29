@@ -1,9 +1,3 @@
-//  'email': user.email,
-//           'displayName': user.displayName,
-//           'photoURL': user.photoURL,
-//           'lastSignInTime': user.metadata.lastSignInTime,
-//           'creationTime': user.metadata.creationTime,
-
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
