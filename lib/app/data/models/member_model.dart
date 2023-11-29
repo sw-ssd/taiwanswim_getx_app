@@ -4,6 +4,8 @@
 //           'lastSignInTime': user.metadata.lastSignInTime,
 //           'creationTime': user.metadata.creationTime,
 
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MemberModel {
@@ -36,4 +38,25 @@ class MemberModel {
       if (photoURL != null) "photoURL": photoURL,
     };
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'displayName': displayName,
+      'email': email,
+      'photoURL': photoURL,
+    };
+  }
+
+  factory MemberModel.fromMap(Map<String, dynamic> map) {
+    return MemberModel(
+      displayName: map['displayName'],
+      email: map['email'],
+      photoURL: map['photoURL'],
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory MemberModel.fromJson(String source) =>
+      MemberModel.fromMap(json.decode(source));
 }
