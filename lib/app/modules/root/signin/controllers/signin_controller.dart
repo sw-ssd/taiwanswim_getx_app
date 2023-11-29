@@ -49,10 +49,9 @@ class SigninController extends GetxController {
         await pd.setAuthMember(user.uid, pdd);
         await pd.setLogin(true);
       }
-
+      final uid = user!.uid;
       Get.snackbar('歡迎回來', '${user!.displayName}');
-      Get.rootDelegate
-          .offAndToNamed(Routes.HOME, parameters: {'uid': user.uid});
+      Get.rootDelegate.offAndToNamed(Routes.HOME, arguments: {'uid': uid});
     } catch (e) {
       Get.snackbar('錯誤', '登入失敗');
     }

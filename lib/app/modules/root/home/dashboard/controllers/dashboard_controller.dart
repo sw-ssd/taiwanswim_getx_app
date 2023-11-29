@@ -1,9 +1,13 @@
 import 'package:get/get.dart';
 
-class DashboardController extends GetxController {
-  //TODO: Implement DashboardController
+import 'package:taiwanswim_getx_app/app/data/providers/signin_provider.dart';
+import 'package:taiwanswim_getx_app/app/data/services/shared_pref_service.dart';
+import 'package:taiwanswim_getx_app/app/routes/app_pages.dart';
 
-  final count = 0.obs;
+class DashboardController extends GetxController {
+  final si = Get.find<SigninProvider>();
+  final pd = Get.find<PrefData>();
+
   @override
   void onInit() {
     super.onInit();
@@ -19,5 +23,14 @@ class DashboardController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
+  googleLogout() async {
+    try {
+      await si.signoutWithGoogle();
+      await pd.setLogin(false);
+      Get.rootDelegate.offAndToNamed(Routes.SIGNIN);
+      Get.snackbar('成功', '登出成功');
+    } catch (e) {
+      Get.snackbar('錯誤', '登出失敗');
+    }
+  }
 }

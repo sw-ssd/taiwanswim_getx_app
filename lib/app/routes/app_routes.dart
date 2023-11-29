@@ -4,7 +4,6 @@ part of 'app_pages.dart';
 // DO NOT EDIT. This is code generated via package:get_cli/get_cli.dart
 
 abstract class Routes {
-  Routes._();
   static const ROOT = _Paths.ROOT;
   static const SPLASH = _Paths.SPLASH;
   static const ONBOARD = _Paths.ONBOARD;
@@ -14,6 +13,11 @@ abstract class Routes {
   static const DASHBOARD = _Paths.HOME + _Paths.DASHBOARD;
   static const PROFILE = _Paths.ROOT + _Paths.HOME + _Paths.PROFILE;
   static const RECORDS = _Paths.ROOT + _Paths.HOME + _Paths.RECORDS;
+
+  Routes._();
+  static String SIGNIN_THEN(String afterSuccessfulLogin) =>
+      '$SIGNIN?then=${Uri.encodeQueryComponent(afterSuccessfulLogin)}';
+  // static String PRODUCT_DETAILS(String productId) => '$PRODUCTS/$productId';
 }
 
 abstract class _Paths {

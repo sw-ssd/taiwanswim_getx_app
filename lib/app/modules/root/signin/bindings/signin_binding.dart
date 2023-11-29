@@ -8,7 +8,7 @@ import '../controllers/signin_controller.dart';
 class SigninBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<SigninProvider>(() => SigninProvider());
+    Get.lazyPut<SigninProvider>(() => SigninProvider(), fenix: true);
     Get.lazyPut<SigninController>(() => SigninController());
     Get.lazyPut<MemeberProvider>(() => MemeberProvider());
   }

@@ -16,6 +16,7 @@ import '../modules/root/signin/views/signin_view.dart';
 import '../modules/root/splash/bindings/splash_binding.dart';
 import '../modules/root/splash/views/splash_view.dart';
 import '../modules/root/views/root_view.dart';
+
 import 'app_middlewares.dart';
 
 // ignore_for_file: prefer_const_literals_to_create_immutables
@@ -34,9 +35,10 @@ class AppPages {
       preventDuplicates: true,
       children: [
         GetPage(
+          // preventDuplicates: true,
           middlewares: [
             //only enter this route when not authed
-            EnsureNotAuthedMiddleware(),
+            EnsureNotAuthedMiddleware()
           ],
           name: _Paths.SIGNIN,
           page: () => const SigninView(),

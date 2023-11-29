@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:line_icons/line_icon.dart';
 
 import 'package:taiwanswim_getx_app/app/routes/app_pages.dart';
 
@@ -8,9 +9,10 @@ import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({super.key});
-
   @override
   Widget build(BuildContext context) {
+    debugPrint('UID:${Get.parameters.toString()}');
+
     return GetRouterOutlet.builder(
       builder: (context, delegate, currentRoute) {
         //This router outlet handles the appbar and the bottom navigation bar
@@ -28,7 +30,35 @@ class HomeView extends GetView<HomeController> {
             // anchorRoute: Routes.HOME,
             key: Get.nestedKey(Routes.HOME),
           ),
-          bottomNavigationBar: BottomNavigationBar(
+          bottomNavigationBar: bottomNav(currentIndex, delegate),
+        );
+      },
+    );
+  }
+
+  Container bottomNav(int currentIndex, GetDelegate delegate) {
+    BottomNavigationBarItem item(Icon actIcon, Icon icon, String label) {
+      return BottomNavigationBarItem(
+          activeIcon: actIcon, icon: icon, label: label);
+    }
+
+    return Container(
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.only(
+              topRight: Radius.circular(22), topLeft: Radius.circular(22)),
+          boxShadow: [
+            BoxShadow(
+                color: const Color.fromRGBO(35, 64, 143, 1).withOpacity(0.12),
+                spreadRadius: 0,
+                blurRadius: 12),
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(22.0),
+            topRight: Radius.circular(22.0),
+          ),
+          child: BottomNavigationBar(
             currentIndex: currentIndex,
             onTap: (value) {
               switch (value) {
@@ -44,26 +74,42 @@ class HomeView extends GetView<HomeController> {
                 default:
               }
             },
-            items: const [
+            items: [
               // _Paths.HOME + [Empty]
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: 'Home',
-              ),
+              item(
+                  const LineIcon.home(
+                    size: 24,
+                    color: Color.fromRGBO(35, 64, 143, 1),
+                  ),
+                  const LineIcon.home(
+                    size: 24,
+                    color: Color.fromRGBO(0, 0, 0, 1),
+                  ),
+                  ''),
               // _Paths.HOME + Routes.PROFILE
-              BottomNavigationBarItem(
-                icon: Icon(Icons.account_box_rounded),
-                label: 'Profile',
-              ),
+              item(
+                  const LineIcon.userCircle(
+                    size: 24,
+                    color: Color.fromRGBO(35, 64, 143, 1),
+                  ),
+                  const LineIcon.userCircle(
+                    size: 24,
+                    color: Color.fromRGBO(0, 0, 0, 1),
+                  ),
+                  ''),
               // _Paths.HOME + _Paths.RECORDS
-              BottomNavigationBarItem(
-                icon: Icon(Icons.account_box_rounded),
-                label: 'Records',
-              ),
+              item(
+                  const LineIcon.alternateTachometer(
+                    size: 24,
+                    color: Color.fromRGBO(35, 64, 143, 1),
+                  ),
+                  const LineIcon.alternateTachometer(
+                    size: 24,
+                    color: Color.fromRGBO(0, 0, 0, 1),
+                  ),
+                  ''),
             ],
           ),
-        );
-      },
-    );
+        ));
   }
 }
