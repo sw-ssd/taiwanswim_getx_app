@@ -38,19 +38,21 @@ class SigninController extends GetxController {
       debugPrint('user: $user');
 
       if (user != null) {
-        await mbrStore.setMember(
-          MemberModel(
-            email: user.email,
-            displayName: user.displayName,
-            photoURL: user.photoURL,
-          ),
-          user.uid,
+        final m = MemberModel(
+          email: user.email,
+          displayName: user.displayName,
+          photoURL: user.photoURL,
         );
+        final pdd = m.toJson();
+
+        await mbrStore.setMember(m, user.uid);
+        await pd.setAuthMember(user.uid, pdd);
         await pd.setLogin(true);
       }
 
-      Get.snackbar('成功', '登入成功');
-      Get.rootDelegate.offAndToNamed(Routes.HOME);
+      Get.snackbar('歡迎回來', '${user!.displayName}');
+      Get.rootDelegate
+          .offAndToNamed(Routes.HOME, parameters: {'uid': user.uid});
     } catch (e) {
       Get.snackbar('錯誤', '登入失敗');
     }

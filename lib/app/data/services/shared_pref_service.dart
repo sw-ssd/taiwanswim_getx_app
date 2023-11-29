@@ -43,6 +43,13 @@ class PrefData extends GetxService {
     return login;
   }
 
+  setAuthMember(String key, String data) async {
+    final prefs = await prefsInstance();
+    prefs.setString(key, data);
+  }
+
+  getAuthMember() async {}
+
   /////////////////////varification/////////
   // static setVarification(bool varification) async {
   //   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();

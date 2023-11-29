@@ -26,18 +26,14 @@ class MemberModel {
   }
 
   Map<String, dynamic> toFirestore() {
-    return {
-      if (displayName != null) "displayName": displayName,
-      if (email != null) "email": email,
-      if (photoURL != null) "photoURL": photoURL,
-    };
+    return toMap();
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'displayName': displayName,
-      'email': email,
-      'photoURL': photoURL,
+      if (displayName != null) "displayName": displayName,
+      if (email != null) "email": email,
+      if (photoURL != null) "photoURL": photoURL,
     };
   }
 
