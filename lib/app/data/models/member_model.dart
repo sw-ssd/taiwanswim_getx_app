@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MemberModel {
-  final String? displayName;
-  final String? email;
-  final String? photoURL;
+  String? displayName;
+  String? email;
+  String? photoURL;
 
   MemberModel({
     this.displayName,

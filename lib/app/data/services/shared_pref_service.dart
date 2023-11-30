@@ -1,9 +1,8 @@
-import 'package:flutter/foundation.dart';
-
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:taiwanswim_getx_app/app/data/constants/app_constants.dart';
+import 'package:taiwanswim_getx_app/app/data/models/member_model.dart';
 
 const String pbStoreName = 'pb_auth';
 
@@ -45,18 +44,25 @@ class PrefData extends GetxService {
     return login;
   }
 
-  // getLoginSync() {
-  //   return SynchronousFuture(
-  //     getLogin(),
-  //   ) as Future<bool>;
-  // }
+  setAuthKey(String data) async {
+    final prefs = await prefsInstance();
+    prefs.setString("uid", data);
+  }
+
+  getAuthKey() async {
+    final prefs = await prefsInstance();
+    prefs.getString("uid");
+  }
 
   setAuthMember(String key, String data) async {
     final prefs = await prefsInstance();
     prefs.setString(key, data);
   }
 
-  getAuthMember() async {}
+  getAuthMember(String uid) async {
+    final prefs = await prefsInstance();
+    return MemberModel.fromJson(prefs.getString(uid) ?? '{}');
+  }
 
   /////////////////////varification/////////
   // static setVarification(bool varification) async {

@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
 import 'package:taiwanswim_getx_app/app/data/models/member_model.dart';
@@ -34,7 +35,6 @@ class SigninController extends GetxController {
     try {
       final uc = await provider.signinWithGoogle();
       final user = uc.user;
-      debugPrint('user: $user');
 
       if (user != null) {
         final m = MemberModel(
@@ -42,18 +42,13 @@ class SigninController extends GetxController {
           displayName: user.displayName,
           photoURL: user.photoURL,
         );
-        final pdd = m.toJson();
 
-        await mbrStore.setMember(m, user.uid);
-        await pd.setAuthMember(user.uid, pdd);
+        await _saveAuth(m, user);
       }
       final uid = user!.uid;
-      await pd.setLogin(true);
-
       final thenTo = Get
           .rootDelegate.currentConfiguration!.currentPage!.parameters?['then'];
-      // print('thenTo: $thenTo');
-      // Get.routing.current = Routes.HOME;
+
       Get.rootDelegate
           .offNamed(thenTo ?? Routes.HOME, parameters: {'uid': uid});
       Get.snackbar('歡迎回來', '${user.displayName}');
@@ -63,17 +58,30 @@ class SigninController extends GetxController {
     }
   }
 
+  void appleToggle() {
+    debugPrint('apple click');
+  }
+
   void googleLogout() async {
     try {
-      await provider.signoutWithGoogle();
-      await pd.setLogin(false);
+      await _saveAuthEmpty();
       Get.snackbar('成功', '登出成功');
     } catch (e) {
       Get.snackbar('錯誤', '登出失敗');
     }
   }
 
-  void appleToggle() {
-    debugPrint('apple click');
+  Future<void> _saveAuthEmpty() async {
+    await provider.signoutWithGoogle();
+    await pd.setAuthKey("");
+    await pd.setAuthMember("", '{}');
+    await pd.setLogin(false);
+  }
+
+  Future<void> _saveAuth(MemberModel m, User user) async {
+    await mbrStore.setMember(m, user.uid);
+    await pd.setAuthKey(user.uid);
+    await pd.setAuthMember(user.uid, m.toJson());
+    await pd.setLogin(true);
   }
 }
