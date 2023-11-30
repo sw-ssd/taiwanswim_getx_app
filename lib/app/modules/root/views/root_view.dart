@@ -28,7 +28,7 @@ class RootView extends GetView<RootController> {
           //   centerTitle: true,
           // ),
           body: GetRouterOutlet(
-            initialRoute: Routes.SPLASH,
+            initialRoute: Routes.SIGNIN,
             // anchorRoute: '/',
             // filterPages: (afterAnchor) {
             //   return afterAnchor.take(1);

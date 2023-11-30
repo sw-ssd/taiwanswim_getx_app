@@ -14,6 +14,11 @@ tasks:
       - flutter build apk --release
     silent: true
 
+  emulators:
+    cmds:
+      - firebase emulators:start
+    silent: true
+
   keystore:uploadkey:
     cmds:
       - keytool -genkey -v -keystore product.jks -storetype JKS -keyalg RSA -keysize 2048 -validity 10000 -alias sowinsoft

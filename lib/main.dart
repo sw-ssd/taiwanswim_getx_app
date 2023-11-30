@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:taiwanswim_getx_app/app/data/services/services.dart';
+import 'package:taiwanswim_getx_app/app/modules/root/splash/views/splash_view.dart';
 
 import 'app/routes/app_pages.dart';
 
@@ -13,28 +14,29 @@ void main() async {
   runApp(
     GetMaterialApp.router(
       debugShowCheckedModeBanner: false,
+      // unknownRoute: GetPage(name: '/notfound', page: () => UnknownRoutePage()),
       title: appTitle,
       getPages: AppPages.routes,
-      // builder: (context, child) {
-      //   return FutureBuilder<void>(
-      //     key: const ValueKey('initFuture'),
-      //     future: Future.delayed(const Duration(seconds: 2)),
-      //     builder: (context, snapshot) {
-      //       if (snapshot.connectionState == ConnectionState.done) {
-      //         return child ?? const SizedBox.shrink();
-      //       }
-      //       return const SplashView();
-      //     },
-      //   );
-      // },
+      builder: (context, child) {
+        return FutureBuilder<void>(
+          key: const ValueKey('initFuture'),
+          future: Future.delayed(const Duration(seconds: 2)),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              return child ?? const SizedBox.shrink();
+            }
+            return const SplashView();
+          },
+        );
+      },
       // routeInformationParser: GetInformationParser(
       //   initialRoute: Routes.SPLASH,
       // ),
-      // routerDelegate: GetDelegate(
-      //   backButtonPopMode: PopMode.History,
-      //   preventDuplicateHandlingMode:
-      //       PreventDuplicateHandlingMode.ReorderRoutes,
-      // ),
+      routerDelegate: GetDelegate(
+        backButtonPopMode: PopMode.History,
+        preventDuplicateHandlingMode:
+            PreventDuplicateHandlingMode.ReorderRoutes,
+      ),
     ),
   );
 }

@@ -11,8 +11,6 @@ class HomeView extends GetView<HomeController> {
   const HomeView({super.key});
   @override
   Widget build(BuildContext context) {
-    debugPrint('UID:${Get.parameters.toString()}');
-
     return GetRouterOutlet.builder(
       builder: (context, delegate, currentRoute) {
         //This router outlet handles the appbar and the bottom navigation bar

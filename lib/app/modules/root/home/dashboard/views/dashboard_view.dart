@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-import 'package:taiwanswim_getx_app/app/modules/root/signin/controllers/signin_controller.dart';
+import 'package:taiwanswim_getx_app/utils/tools.dart';
 
 import '../controllers/dashboard_controller.dart';
 
@@ -10,7 +10,11 @@ class DashboardView extends GetView<DashboardController> {
   const DashboardView({super.key});
   @override
   Widget build(BuildContext context) {
-    debugPrint('UID:${Get.parameters.toString()}');
+    final uid = getParameter("uid");
+    final uid2 = getArguments();
+    print('uid2: ${uid2}');
+
+    print('uid: ${uid}');
 
     return Scaffold(
       appBar: AppBar(
@@ -25,6 +29,7 @@ class DashboardView extends GetView<DashboardController> {
               style: TextStyle(fontSize: 20),
             ),
           ),
+          const SizedBox(height: 20),
           TextButton(
             onPressed: () {
               controller.googleLogout();

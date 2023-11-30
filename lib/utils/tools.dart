@@ -10,3 +10,10 @@ String getEnvBaseUrl() {
   final String schema = dot.getEnvWithDefault("SCHEMA", "http");
   return '$schema://$host:$port';
 }
+
+String? getParameter(String key) =>
+    Get.rootDelegate.currentConfiguration!.currentPage!.parameters?[key];
+
+Object? getArguments() =>
+    Get.rootDelegate.currentConfiguration!.currentPage!.arguments;
+// Object? getArguments() => Get.rootDelegate.history.last.currentPage?.arguments;

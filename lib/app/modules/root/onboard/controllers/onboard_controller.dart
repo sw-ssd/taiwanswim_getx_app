@@ -44,7 +44,7 @@ class OnboardController extends GetxController {
     currentpage.value = index;
   }
 
-  nextPage(PageController pageController) {
+  _nextPage(PageController pageController) {
     pageController.nextPage(
         duration: const Duration(milliseconds: 100), curve: Curves.bounceIn);
   }
@@ -54,7 +54,7 @@ class OnboardController extends GetxController {
       _pd.setIntro(true);
       Get.rootDelegate.offAndToNamed(Routes.SIGNIN);
     } else {
-      nextPage(pageController);
+      _nextPage(pageController);
     }
   }
 }

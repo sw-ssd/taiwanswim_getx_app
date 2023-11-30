@@ -13,8 +13,6 @@ import '../modules/root/onboard/bindings/onboard_binding.dart';
 import '../modules/root/onboard/views/onboard_view.dart';
 import '../modules/root/signin/bindings/signin_binding.dart';
 import '../modules/root/signin/views/signin_view.dart';
-import '../modules/root/splash/bindings/splash_binding.dart';
-import '../modules/root/splash/views/splash_view.dart';
 import '../modules/root/views/root_view.dart';
 
 import 'app_middlewares.dart';
@@ -35,7 +33,6 @@ class AppPages {
       preventDuplicates: true,
       children: [
         GetPage(
-          // preventDuplicates: true,
           middlewares: [
             //only enter this route when not authed
             EnsureNotAuthedMiddleware()
@@ -49,30 +46,40 @@ class AppPages {
           name: _Paths.HOME,
           page: () => const HomeView(),
           binding: HomeBinding(),
+          middlewares: [
+            //only enter this route when authed
+            EnsureAuthMiddleware()
+          ],
           title: null,
           children: [
             GetPage(
               name: _Paths.DASHBOARD,
               page: () => const DashboardView(),
               binding: DashboardBinding(),
+              // middlewares: [
+              //   //only enter this route when authed
+              //   EnsureAuthMiddleware()
+              // ],
             ),
             GetPage(
               name: _Paths.PROFILE,
               page: () => const ProfileView(),
               binding: ProfileBinding(),
+              // middlewares: [
+              //   //only enter this route when authed
+              //   EnsureAuthMiddleware()
+              // ],
             ),
             GetPage(
               name: _Paths.RECORDS,
               page: () => const RecordsView(),
               binding: RecordsBinding(),
+              // middlewares: [
+              //   //only enter this route when authed
+              //   EnsureAuthMiddleware()
+              // ],
             ),
           ],
-        ),
-        GetPage(
-          // preventDuplicates: true,
-          name: _Paths.SPLASH,
-          page: () => const SplashView(),
-          binding: SplashBinding(),
         ),
         GetPage(
           // preventDuplicates: true,

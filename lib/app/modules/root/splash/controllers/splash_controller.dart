@@ -9,12 +9,16 @@ class SplashController extends GetxController {
   getIntro() async {
     final pd = Get.find<PrefData>();
     bool isIntro = await pd.getIntro();
-    // Get.rootDelegate.toNamed(Routes.ONBOARD);
+
+    // for testing
+    // isIntro = false;
+
     if (isIntro == false) {
       Timer(const Duration(seconds: 3),
-          () => Get.rootDelegate.toNamed(Routes.ONBOARD));
-    } else {
-      Get.rootDelegate.toNamed(Routes.SIGNIN);
+          () => Get.rootDelegate.offAndToNamed(Routes.ONBOARD));
+
+      // } else {
+      //   Get.rootDelegate.toNamed(Routes.SIGNIN);
     }
   }
 }

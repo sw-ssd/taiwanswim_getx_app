@@ -1,7 +1,6 @@
 // ignore_for_file: unnecessary_overrides
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 
 import 'package:get/get.dart';
 
@@ -47,12 +46,19 @@ class SigninController extends GetxController {
 
         await mbrStore.setMember(m, user.uid);
         await pd.setAuthMember(user.uid, pdd);
-        await pd.setLogin(true);
       }
       final uid = user!.uid;
-      Get.snackbar('歡迎回來', '${user!.displayName}');
-      Get.rootDelegate.offAndToNamed(Routes.HOME, arguments: {'uid': uid});
+      await pd.setLogin(true);
+
+      final thenTo = Get
+          .rootDelegate.currentConfiguration!.currentPage!.parameters?['then'];
+      // print('thenTo: $thenTo');
+      // Get.routing.current = Routes.HOME;
+      Get.rootDelegate
+          .offNamed(thenTo ?? Routes.HOME, parameters: {'uid': uid});
+      Get.snackbar('歡迎回來', '${user.displayName}');
     } catch (e) {
+      await pd.setLogin(false);
       Get.snackbar('錯誤', '登入失敗');
     }
   }
@@ -60,6 +66,7 @@ class SigninController extends GetxController {
   void googleLogout() async {
     try {
       await provider.signoutWithGoogle();
+      await pd.setLogin(false);
       Get.snackbar('成功', '登出成功');
     } catch (e) {
       Get.snackbar('錯誤', '登出失敗');

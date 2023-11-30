@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -42,6 +44,12 @@ class PrefData extends GetxService {
     bool login = prefs.getBool(isLoginName) ?? false;
     return login;
   }
+
+  // getLoginSync() {
+  //   return SynchronousFuture(
+  //     getLogin(),
+  //   ) as Future<bool>;
+  // }
 
   setAuthMember(String key, String data) async {
     final prefs = await prefsInstance();
