@@ -12,11 +12,6 @@ class PrefData extends GetxService {
   late String isVarificationName = '${AppConstants.PREFS_NAME}isVarification';
   late String isFirstLoginName = '${AppConstants.PREFS_NAME}isFirstLogin';
 
-  // final isLogin = false.obs;
-  // final isIntro = false.obs;
-  // final isVarification = false.obs;
-  // final isFirstLogin = false.obs;
-
   Future<SharedPreferences> prefsInstance() async {
     return await SharedPreferences.getInstance();
   }
@@ -51,7 +46,7 @@ class PrefData extends GetxService {
 
   getAuthKey() async {
     final prefs = await prefsInstance();
-    prefs.getString("uid");
+    return prefs.getString("uid");
   }
 
   setAuthMember(String key, String data) async {
@@ -61,7 +56,7 @@ class PrefData extends GetxService {
 
   getAuthMember(String uid) async {
     final prefs = await prefsInstance();
-    return MemberModel.fromJson(prefs.getString(uid) ?? '{}');
+    return prefs.getString(uid);
   }
 
   /////////////////////varification/////////

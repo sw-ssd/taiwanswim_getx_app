@@ -31,6 +31,10 @@ class AppPages {
       binding: RootBinding(),
       participatesInRootNavigator: true,
       preventDuplicates: true,
+      middlewares: [
+        //only enter this route when not authed
+        EnsureAuthMiddleware()
+      ],
       children: [
         GetPage(
           middlewares: [

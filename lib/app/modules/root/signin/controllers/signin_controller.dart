@@ -22,11 +22,6 @@ class SigninController extends GetxController {
   }
 
   @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
   void onClose() {
     super.onClose();
   }
@@ -45,10 +40,10 @@ class SigninController extends GetxController {
 
         await _saveAuth(m, user);
       }
-      final uid = user!.uid;
       final thenTo = Get
           .rootDelegate.currentConfiguration!.currentPage!.parameters?['then'];
 
+      final uid = user!.uid;
       Get.rootDelegate
           .offNamed(thenTo ?? Routes.HOME, parameters: {'uid': uid});
       Get.snackbar('歡迎回來', '${user.displayName}');
@@ -83,5 +78,7 @@ class SigninController extends GetxController {
     await pd.setAuthKey(user.uid);
     await pd.setAuthMember(user.uid, m.toJson());
     await pd.setLogin(true);
+
+    // print('uid pref: ${user.uid}');
   }
 }

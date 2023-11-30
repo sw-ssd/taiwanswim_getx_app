@@ -13,6 +13,24 @@ class DashboardView extends GetView<DashboardController> {
   @override
   Widget build(BuildContext context) {
     initializeScreenSize(context);
+
+    Obx avatarCheck = Obx(() {
+      // controller.photoURL.value == ""
+      //     ? Image.asset("assets/images/successpayment.png")
+      //     : Image.network(controller.photoURL.value,
+      //         scale: 1.0);
+      var fadeInImage = FadeInImage(
+        placeholder: const AssetImage("assets/images/successpayment.png"),
+        image: NetworkImage(controller.photoURL.value, scale: 1.0),
+        height: 50.h,
+        width: 49.93.w,
+      );
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(50),
+        child: fadeInImage,
+      );
+    });
+
     return PopScope(
       canPop: false,
       child: Scaffold(
@@ -28,18 +46,22 @@ class DashboardView extends GetView<DashboardController> {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20.w),
                     child: Row(children: [
-                      Image(
-                        image: AssetImage(controller.member.value.photoURL!),
-                        height: 50.h,
-                        width: 49.93.w,
-                      ),
+                      avatarCheck,
                       SizedBox(width: 10.w),
-                      Text("Welcome,${controller.member.value.displayName!}",
-                          style: TextStyle(
+                      Obx(
+                        () => Expanded(
+                          child: Text(
+                            "Welcome,${controller.displayName.value}",
+                            softWrap: true,
+                            style: TextStyle(
                               fontFamily: 'Gilroy',
                               color: const Color.fromRGBO(0, 0, 0, 1),
                               fontSize: 22.sp,
-                              fontWeight: FontWeight.w700))
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                      )
                     ]),
                   ),
                   SizedBox(height: 30.h),

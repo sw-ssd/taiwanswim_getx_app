@@ -15,9 +15,8 @@ class EnsureAuthMiddleware extends GetMiddleware {
     // print('route: ${route.uri}');
 
     if (!isLogin) {
+      print('EnsureAuthMiddleware: redirect to signin');
       final newRoute = Routes.signinThen(route.location);
-      print('newRoute thenTo: $newRoute');
-
       return GetNavConfig.fromRoute(newRoute);
     }
     return await super.redirectDelegate(route);
@@ -33,6 +32,7 @@ class EnsureNotAuthedMiddleware extends GetMiddleware {
     await Future.delayed(const Duration(milliseconds: 500));
     if (isLogin) {
       //NEVER navigate to auth screen, when user is already authed
+      print('EnsureNotAuthedMiddleware: redirect to home');
       return null;
       // return null;
       //OR redirect user to another screen
