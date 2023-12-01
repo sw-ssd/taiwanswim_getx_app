@@ -41,6 +41,7 @@ class AppPages {
             //only enter this route when not authed
             EnsureNotAuthedMiddleware()
           ],
+          preventDuplicates: true,
           name: _Paths.SIGNIN,
           page: () => const SigninView(),
           binding: SigninBinding(),
@@ -57,6 +58,7 @@ class AppPages {
           title: null,
           children: [
             GetPage(
+              preventDuplicates: true,
               name: _Paths.DASHBOARD,
               page: () => const DashboardView(),
               binding: DashboardBinding(),
@@ -66,6 +68,7 @@ class AppPages {
               // ],
             ),
             GetPage(
+              preventDuplicates: true,
               name: _Paths.PROFILE,
               page: () => const ProfileView(),
               binding: ProfileBinding(),
@@ -75,6 +78,7 @@ class AppPages {
               // ],
             ),
             GetPage(
+              preventDuplicates: true,
               name: _Paths.RECORDS,
               page: () => const RecordsView(),
               binding: RecordsBinding(),
@@ -86,7 +90,7 @@ class AppPages {
           ],
         ),
         GetPage(
-          // preventDuplicates: true,
+          preventDuplicates: true,
           name: _Paths.ONBOARD,
           page: () => const OnboardView(),
           binding: OnboardBinding(),

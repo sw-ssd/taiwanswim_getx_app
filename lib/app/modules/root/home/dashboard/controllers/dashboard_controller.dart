@@ -4,6 +4,7 @@ import 'dart:developer';
 
 import 'package:get/get.dart';
 
+import 'package:taiwanswim_getx_app/app/data/constants/app_constants.dart';
 import 'package:taiwanswim_getx_app/app/data/models/member_model.dart';
 import 'package:taiwanswim_getx_app/app/data/providers/signin_provider.dart';
 import 'package:taiwanswim_getx_app/app/data/services/shared_pref_service.dart';
@@ -12,11 +13,9 @@ import 'package:taiwanswim_getx_app/app/routes/app_pages.dart';
 class DashboardController extends GetxController {
   final si = Get.find<SigninProvider>();
   final pd = Get.find<PrefData>();
-  final displayName = 'User'.obs;
-  final email = 'guest@ex.com'.obs;
-  final photoURL =
-      'https://lh3.googleusercontent.com/a/ACg8ocIBCOSoggEX4RrU7vmzX_qnG-TBboty3cmrbV593-9vog=s96-c'
-          .obs;
+  final displayName = AppConstants.guestDisplayName.obs;
+  final email = AppConstants.guestEmail.obs;
+  final photoURL = AssetConstants.defaultAvatar.obs;
 
   @override
   void onInit() {
@@ -32,14 +31,10 @@ class DashboardController extends GetxController {
   getMember(String? uid) async {
     final m = await pd.getAuthMember(uid ?? "");
     final mm = MemberModel.fromJson(m);
-    displayName.value = mm.displayName!;
-    email.value = mm.email ?? 'guest@ex.com';
-    photoURL.value = mm.photoURL ?? '';
+    displayName.value = mm.displayName ?? AppConstants.guestDisplayName;
+    email.value = mm.email ?? AppConstants.guestEmail;
+    photoURL.value = mm.photoURL ?? AssetConstants.defaultAvatar;
     update();
-    log('photoURL: ${photoURL.value}');
-//     File picture = await ImagePicker.pickImage(source: ImageSource.camera);
-// Image.file(picture, width: 500, height: 500)
-// You can use this same file to display the image.
   }
 
   googleLogout() async {

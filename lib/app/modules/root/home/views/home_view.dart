@@ -40,13 +40,16 @@ class HomeView extends GetView<HomeController> {
           activeIcon: actIcon, icon: icon, label: label);
     }
 
+    Color actIconColor = const Color.fromRGBO(35, 64, 143, 1);
+    Color inactIconColor = const Color.fromRGBO(0, 0, 0, 1);
+
     return Container(
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.only(
               topRight: Radius.circular(22), topLeft: Radius.circular(22)),
           boxShadow: [
             BoxShadow(
-                color: const Color.fromRGBO(35, 64, 143, 1).withOpacity(0.12),
+                color: actIconColor.withOpacity(0.12),
                 spreadRadius: 0,
                 blurRadius: 12),
           ],
@@ -58,6 +61,9 @@ class HomeView extends GetView<HomeController> {
           ),
           child: BottomNavigationBar(
             currentIndex: currentIndex,
+            showSelectedLabels: true,
+            showUnselectedLabels: false,
+            selectedItemColor: actIconColor,
             onTap: (value) {
               switch (value) {
                 case 0:
@@ -75,37 +81,37 @@ class HomeView extends GetView<HomeController> {
             items: [
               // _Paths.HOME + [Empty]
               item(
-                  const LineIcon.home(
+                  LineIcon.home(
                     size: 24,
-                    color: Color.fromRGBO(35, 64, 143, 1),
+                    color: actIconColor,
                   ),
-                  const LineIcon.home(
+                  LineIcon.home(
                     size: 24,
-                    color: Color.fromRGBO(0, 0, 0, 1),
+                    color: inactIconColor,
                   ),
-                  ''),
+                  '儀表板'),
               // _Paths.HOME + Routes.PROFILE
               item(
-                  const LineIcon.userCircle(
+                  LineIcon.userCircle(
                     size: 24,
-                    color: Color.fromRGBO(35, 64, 143, 1),
+                    color: actIconColor,
                   ),
-                  const LineIcon.userCircle(
+                  LineIcon.userCircle(
                     size: 24,
-                    color: Color.fromRGBO(0, 0, 0, 1),
+                    color: inactIconColor,
                   ),
-                  ''),
+                  '個人資料'),
               // _Paths.HOME + _Paths.RECORDS
               item(
-                  const LineIcon.alternateTachometer(
+                  LineIcon.alternateTachometer(
                     size: 24,
-                    color: Color.fromRGBO(35, 64, 143, 1),
+                    color: actIconColor,
                   ),
-                  const LineIcon.alternateTachometer(
+                  LineIcon.alternateTachometer(
                     size: 24,
-                    color: Color.fromRGBO(0, 0, 0, 1),
+                    color: inactIconColor,
                   ),
-                  ''),
+                  '紀錄訂閱'),
             ],
           ),
         ));

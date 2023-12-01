@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import 'package:taiwanswim_getx_app/app/data/constants/app_constants.dart';
 import 'package:taiwanswim_getx_app/utils/screen_size.dart';
 
 import '../controllers/dashboard_controller.dart';
@@ -20,7 +23,7 @@ class DashboardView extends GetView<DashboardController> {
       //     : Image.network(controller.photoURL.value,
       //         scale: 1.0);
       var fadeInImage = FadeInImage(
-        placeholder: const AssetImage("assets/images/successpayment.png"),
+        placeholder: const AssetImage(AssetConstants.defaultPlacehold),
         image: NetworkImage(controller.photoURL.value, scale: 1.0),
         height: 50.h,
         width: 49.93.w,
@@ -30,6 +33,23 @@ class DashboardView extends GetView<DashboardController> {
         child: fadeInImage,
       );
     });
+
+    Obx dname = Obx(
+      () => Expanded(
+        child: Text(
+          "Welcome,${controller.displayName.value}",
+          // softWrap: true,
+          overflow: TextOverflow.ellipsis,
+          maxLines: 1,
+          style: TextStyle(
+            fontFamily: 'Gilroy',
+            color: const Color.fromRGBO(0, 0, 0, 1),
+            fontSize: 22.sp,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+      ),
+    );
 
     return PopScope(
       canPop: false,
@@ -48,20 +68,7 @@ class DashboardView extends GetView<DashboardController> {
                     child: Row(children: [
                       avatarCheck,
                       SizedBox(width: 10.w),
-                      Obx(
-                        () => Expanded(
-                          child: Text(
-                            "Welcome,${controller.displayName.value}",
-                            softWrap: true,
-                            style: TextStyle(
-                              fontFamily: 'Gilroy',
-                              color: const Color.fromRGBO(0, 0, 0, 1),
-                              fontSize: 22.sp,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                        ),
-                      )
+                      dname,
                     ]),
                   ),
                   SizedBox(height: 30.h),
@@ -77,7 +84,9 @@ class DashboardView extends GetView<DashboardController> {
                           child: Padding(
                             padding: EdgeInsets.symmetric(horizontal: 20.w),
                             child: TextFormField(
-                                onTap: () {},
+                                onTap: () {
+                                  log("Search");
+                                },
                                 decoration: InputDecoration(
                                     focusedBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
@@ -95,19 +104,21 @@ class DashboardView extends GetView<DashboardController> {
                                         fontWeight: FontWeight.w400),
                                     prefixIcon: Image(
                                       image: const AssetImage(
-                                          'assets/images/search.png'),
+                                          AssetConstants.search),
                                       height: 24.h,
                                       width: 24.w,
                                     ),
                                     suffixIcon: GestureDetector(
-                                      onTap: () {},
+                                      onTap: () {
+                                        log("Filter");
+                                      },
                                       child: Container(
                                         height: 5.h,
                                         width: 5.w,
                                         decoration: const BoxDecoration(
                                           image: DecorationImage(
                                             image: AssetImage(
-                                                "assets/images/filico.png"),
+                                                AssetConstants.filico),
                                           ),
                                         ),
                                       ),
@@ -122,6 +133,7 @@ class DashboardView extends GetView<DashboardController> {
                   ),
                   SizedBox(height: 20.h),
                   ElevatedButton(
+                      // for testing
                       onPressed: controller.googleLogout,
                       child: const Text("Logout"))
                 ],

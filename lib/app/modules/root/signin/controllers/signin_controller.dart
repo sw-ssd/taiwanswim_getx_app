@@ -43,10 +43,8 @@ class SigninController extends GetxController {
       final thenTo = Get
           .rootDelegate.currentConfiguration!.currentPage!.parameters?['then'];
 
-      final uid = user!.uid;
-      Get.rootDelegate
-          .offNamed(thenTo ?? Routes.HOME, parameters: {'uid': uid});
-      Get.snackbar('歡迎回來', '${user.displayName}');
+      Get.rootDelegate.offNamed(thenTo ?? Routes.HOME);
+      Get.snackbar('歡迎回來', '${user!.displayName}');
     } catch (e) {
       await pd.setLogin(false);
       Get.snackbar('錯誤', '登入失敗');
@@ -78,7 +76,5 @@ class SigninController extends GetxController {
     await pd.setAuthKey(user.uid);
     await pd.setAuthMember(user.uid, m.toJson());
     await pd.setLogin(true);
-
-    // print('uid pref: ${user.uid}');
   }
 }
