@@ -10,10 +10,11 @@ import 'package:taiwanswim_getx_app/app/data/services/shared_pref_service.dart';
 import 'package:taiwanswim_getx_app/app/routes/app_pages.dart';
 
 class OnboardController extends GetxController {
+  final _op = Get.find<OnboardProvider>();
+  final _pd = Get.find<PrefData>();
+
   final pages = RxList<Onboard>().obs;
   RxInt currentpage = 0.obs;
-
-  final _pd = Get.find<PrefData>();
 
   @override
   void onInit() {
@@ -32,7 +33,7 @@ class OnboardController extends GetxController {
   }
 
   initPageMock() {
-    pages.value.addAll(Get.find<OnboardProvider>().getOnboardsMock());
+    pages.value.addAll(_op.boards);
   }
 
   onChangePage(int index) {
