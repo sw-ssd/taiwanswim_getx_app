@@ -19,9 +19,9 @@ tasks:
       - firebase emulators:start
     silent: true
 
-  keystore:uploadkey:
+  keystore:genkey:
     cmds:
-      - keytool -genkey -v -keystore product.jks -storetype JKS -keyalg RSA -keysize 2048 -validity 10000 -alias sowinsoft
+      - keytool -genkey -v -keystore ~/development/keystore/taiwanswim.jks -storetype JKS -keyalg RSA -keysize 2048 -validity 10000 -alias taiwanswimkey
     silent: true
 
   keystore:convertkey:
@@ -32,4 +32,14 @@ tasks:
   keystore:debugkey:
     cmds:
       - keytool -list -v -alias androiddebugkey -storepass android -keypass android -keystore ~/.android/debug.keystore
+    silent: true
+
+  open:ios:
+    cmds:
+      - open ios/Runner.xcworkspace
+    silent: true
+  
+  open:android:
+    cmds:
+      - open -a /Applications/Android\ Studio.app android
     silent: true
